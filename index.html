@@ -40,14 +40,7 @@
                 <button id="btn-load-game" class="btn-ui py-3 text-xl w-full c-info" onclick="game.loadGame()">讀取存檔</button>
             </div>
             <div id="creation-menu" class="hidden">
-                <div class="c-sys mb-4 text-center text-lg">請選擇職業並分配初始能力點數。</div>
-                <div id="class-select" class="grid grid-cols-2 gap-2 mb-5">
-                    <button class="btn-ui class-btn c-success" onclick="game.selectClass('knight')">騎士</button>
-                    <button class="btn-ui class-btn" onclick="game.selectClass('elf')">妖精</button>
-                    <button class="btn-ui class-btn" onclick="game.selectClass('wizard')">法師</button>
-                    <button class="btn-ui class-btn" onclick="game.selectClass('dark_elf')">黑暗妖精</button>
-                </div>
-                <div id="class-desc" class="c-sys mb-5 text-sm leading-relaxed border border-gray-800 rounded p-3 bg-black/30"></div>
+                <div class="c-sys mb-6 text-center text-lg">請分配您的初始能力點數。</div>
                 <div class="grid grid-cols-2 gap-y-4 mb-8 px-6 text-lg">
                     <div class="flex items-center">力量 (STR): <span id="create-str" class="c-info w-8 inline-block text-right ml-2">8</span></div>
                     <div class="flex justify-end gap-2"><button class="btn-ui px-4" onclick="game.adjustStat('str', -1)">-</button><button class="btn-ui px-4" onclick="game.adjustStat('str', 1)">+</button></div>
@@ -95,7 +88,7 @@
         <div class="w-1/4 flex flex-col gap-3 h-full">
             <div class="panel-border p-5 flex-shrink-0 rounded-md">
                 <div class="c-title text-2xl mb-3 border-b border-gray-800 pb-2">角色狀態</div>
-                <div class="text-xl mb-2">等級 <span id="ui-level" class="c-warn font-bold">1</span> <span id="ui-class" class="c-info text-base ml-2">騎士</span></div>
+                <div class="text-xl mb-2">等級 <span id="ui-level" class="c-warn font-bold">1</span></div>
                 <div class="space-y-2 mb-4">
                     <div class="flex items-center">體力:<div class="bar-container flex-1"><div class="bar-fill hp" id="ui-hp-bar" style="width: 100%;"></div><span class="bar-text" id="ui-hp-text">12/12</span></div></div>
                     <div class="flex items-center">魔力:<div class="bar-container flex-1"><div class="bar-fill mp" id="ui-mp-bar" style="width: 100%;"></div><span class="bar-text" id="ui-mp-text">10/10</span></div></div>
@@ -160,30 +153,8 @@
                             <div class="list-item mt-2 border-t border-gray-800 pt-4"><span class="c-item">對武器施法的卷軸</span> <div class="flex items-center gap-3"><span class="c-warn">75,000 金幣</span> <button class="btn-ui !px-3 !py-1" onclick="game.buyItem('scroll_weapon')">購買</button></div></div>
                             <div class="list-item"><span class="c-item">對盔甲施法的卷軸</span> <div class="flex items-center gap-3"><span class="c-warn">30,000 金幣</span> <button class="btn-ui !px-3 !py-1" onclick="game.buyItem('scroll_armor')">購買</button></div></div>
                         </div>
-                        <div class="c-title mb-3 border-b border-gray-800 pb-2 text-xl">象牙塔職業書商人</div>
-                        <div class="grid grid-cols-1 gap-3 mb-8">
-                            <div class="list-item"><span class="c-info">精靈水晶(魔法防禦)</span> <div class="flex items-center gap-3"><span class="c-warn">15,000 金幣</span> <button class="btn-ui !px-3 !py-1" onclick="game.buyItem('crystal_elf_resist_magic')">購買</button></div></div>
-                            <div class="list-item"><span class="c-info">精靈水晶(魂體轉換)</span> <div class="flex items-center gap-3"><span class="c-warn">20,000 金幣</span> <button class="btn-ui !px-3 !py-1" onclick="game.buyItem('crystal_elf_body_to_mind')">購買</button></div></div>
-                            <div class="list-item"><span class="c-info">精靈水晶(三重矢)</span> <div class="flex items-center gap-3"><span class="c-warn">30,000 金幣</span> <button class="btn-ui !px-3 !py-1" onclick="game.buyItem('crystal_elf_triple_arrow')">購買</button></div></div>
-                            <div class="list-item"><span class="c-info">精靈水晶(淨化精神)</span> <div class="flex items-center gap-3"><span class="c-warn">40,000 金幣</span> <button class="btn-ui !px-3 !py-1" onclick="game.buyItem('crystal_elf_clear_mind')">購買</button></div></div>
-                            <div class="list-item border-t border-gray-800 pt-4"><span class="c-magic">黑暗精靈水晶(附加劇毒)</span> <div class="flex items-center gap-3"><span class="c-warn">20,000 金幣</span> <button class="btn-ui !px-3 !py-1" onclick="game.buyItem('crystal_dark_enchant_venom')">購買</button></div></div>
-                            <div class="list-item"><span class="c-magic">黑暗精靈水晶(暗影防護)</span> <div class="flex items-center gap-3"><span class="c-warn">30,000 金幣</span> <button class="btn-ui !px-3 !py-1" onclick="game.buyItem('crystal_dark_shadow_armor')">購買</button></div></div>
-                        </div>
                         <div class="c-title mb-3 border-b border-gray-800 pb-2 text-xl">卡立普寶石交換</div>
                         <div id="gem-exchange-list" class="grid grid-cols-1 gap-3 mb-8"></div>
-                        <div class="c-title mb-3 border-b border-gray-800 pb-2 text-xl">弓箭補給與古代裝備製作</div>
-                        <div class="grid grid-cols-1 gap-3 mb-8">
-                            <div class="list-item"><span class="c-item">普通箭桶</span> <div class="flex items-center gap-3"><span class="c-warn">1,000 金幣</span> <button class="btn-ui !px-3 !py-1" onclick="game.buyItem('quiver_normal')">購買</button></div></div>
-                            <div class="list-item"><span class="c-item">銀箭桶</span> <div class="flex items-center gap-3"><span class="c-warn">8,000 金幣</span> <button class="btn-ui !px-3 !py-1" onclick="game.buyItem('quiver_silver')">購買</button></div></div>
-                            <div class="list-item border-t border-gray-800 pt-4"><span class="c-legendary">古老的劍</span> <button class="btn-ui !px-3 !py-1" onclick="game.craftAncientItem('sealed_forgotten_sword','ancient_sword')">製作</button></div>
-                            <div class="list-item"><span class="c-legendary">古老的巨劍</span> <button class="btn-ui !px-3 !py-1" onclick="game.craftAncientItem('sealed_forgotten_great_sword','ancient_great_sword')">製作</button></div>
-                            <div class="list-item"><span class="c-legendary">古老的弩槍</span> <button class="btn-ui !px-3 !py-1" onclick="game.craftAncientItem('sealed_forgotten_crossbow','ancient_crossbow')">製作</button></div>
-                            <div class="list-item"><span class="c-legendary">古老的雙刀</span> <button class="btn-ui !px-3 !py-1" onclick="game.craftAncientItem('sealed_forgotten_dual_blade','ancient_dual_blade')">製作</button></div>
-                            <div class="list-item"><span class="c-legendary">古老的魔杖</span> <button class="btn-ui !px-3 !py-1" onclick="game.craftAncientItem('sealed_forgotten_staff','ancient_staff')">製作</button></div>
-                            <div class="list-item"><span class="c-legendary">古老的皮盔甲</span> <button class="btn-ui !px-3 !py-1" onclick="game.craftAncientItem('sealed_forgotten_leather_armor','ancient_leather_armor')">製作</button></div>
-                            <div class="list-item"><span class="c-legendary">古老的長袍盔甲</span> <button class="btn-ui !px-3 !py-1" onclick="game.craftAncientItem('sealed_forgotten_robe_armor','ancient_robe_armor')">製作</button></div>
-                            <div class="list-item"><span class="c-legendary">古老的金屬盔甲</span> <button class="btn-ui !px-3 !py-1" onclick="game.craftAncientItem('sealed_forgotten_metal_armor','ancient_metal_armor')">製作</button></div>
-                        </div>
                         <div class="c-title mb-3 border-b border-gray-800 pb-2 text-xl">自動功能設定</div>
                         <div class="space-y-4 c-sys bg-gray-900 p-4 rounded border border-gray-800 mb-8">
                             <div class="flex items-center flex-wrap gap-3">
@@ -263,22 +234,12 @@ function rollDice(dice) {
     }
     return sum;
 }
-function getDiceMax(dice) {
-    if (!dice || typeof dice !== 'string') return parseInt(dice) || 0;
-    return dice.split('+').reduce((sum, part) => {
-        if(part.toLowerCase().includes('d')) {
-            let [count, sides] = part.toLowerCase().split('d').map(Number);
-            return sum + ((count || 1) * (sides || 1));
-        }
-        return sum + (parseInt(part) || 0);
-    }, 0);
-}
 
 const compareItems = (keyA, keyB, inventory) => {
     let itemA = inventory[keyA], itemB = inventory[keyB];
     let defA = ITEMS[itemA.itemId] || { type: 'unknown', name: '未知' };
     let defB = ITEMS[itemB.itemId] || { type: 'unknown', name: '未知' };
-    const typeOrder = { 'potion_hp':1, 'potion_mp':1, 'potion_buff':1, 'scroll':2, 'book':3, 'gem':4, 'weapon':5, 'quiver':6, 'helmet':7, 'tshirt':8, 'armor':9, 'shield':10, 'cloak':11, 'leggings':12, 'gloves':13, 'boots':14, 'amulet':15, 'earring':16, 'belt':17, 'ring':18, 'quest':99 };
+    const typeOrder = { 'potion_hp':1, 'potion_mp':1, 'potion_buff':1, 'scroll':2, 'book':3, 'gem':4, 'weapon':5, 'helmet':6, 'tshirt':7, 'armor':8, 'shield':9, 'cloak':10, 'leggings':11, 'gloves':12, 'boots':13, 'amulet':14, 'earring':15, 'belt':16, 'ring':17, 'quest':99 };
     let tA = typeOrder[defA.type] || 99, tB = typeOrder[defB.type] || 99;
     if (tA !== tB) return tA - tB;
     let bA = itemA.isBlessed || defA.isBlessed ? 1 : 0, bB = itemB.isBlessed || defB.isBlessed ? 1 : 0;
@@ -350,11 +311,6 @@ const ITEMS = {
     staff_mana: { name: '瑪那魔杖', type: 'weapon', hands: 1, speed: 1000, safe: 6, dice: '1d3', hit: -3, dropRate: 1, desc: '命中時吸收魔力，強化越高平均吸收量越高。' },
     sword_dk_fire: { name: '死亡騎士的烈炎之劍', type: 'weapon', hands: 1, speed: 800, safe: 6, dice: '1d13', hit: 5, dropRate: 0.1, legendary: true, desc: '攻擊時有機率發動烈炎術。' },
     sword_two_handed: { name: '雙手劍', type: 'weapon', hands: 2, speed: 1100, safe: 6, dice: '1d19', hit: 0, dropRate: 1 },
-    bow_hunter: { name: '獵人之弓', type: 'weapon', weaponClass: 'bow', hands: 2, speed: 900, safe: 6, dice: '1d6', hit: 2, dropRate: 1, desc: '遠距離武器，命中與傷害主要受敏捷影響。' },
-    crossbow: { name: '十字弓', type: 'weapon', weaponClass: 'bow', hands: 2, speed: 1000, safe: 6, dice: '1d8', hit: 3, dropRate: 0.5, desc: '遠距離武器，命中與傷害主要受敏捷影響。' },
-    bow_yumi: { name: '尤米弓', type: 'weapon', weaponClass: 'bow', hands: 2, speed: 900, safe: 6, dice: '1d10', hit: 4, dropRate: 0.1, legendary: true, desc: '高階弓，適合妖精長時間狩獵。' },
-    claw_dark: { name: '黑暗鋼爪', type: 'weapon', weaponClass: 'claw', hands: 1, speed: 800, safe: 6, dice: '1d12', hit: 2, dropRate: 0.2, desc: '黑暗妖精武器，暴擊時造成更高傷害。' },
-    dual_blade_dark: { name: '黑暗雙刀', type: 'weapon', weaponClass: 'dual_blade', hands: 1, speed: 750, safe: 6, dice: '1d10', hit: 3, dropRate: 0.2, desc: '黑暗妖精武器，攻速快且有額外爆發。' },
     helm_orc: { name: '歐西斯頭盔', type: 'helmet', safe: 4, ac: -1, dropRate: 1 },
     ring_mail_orc: { name: '歐西斯環甲', type: 'armor', safe: 4, ac: -4, dropRate: 5 },
     boots_short: { name: '短統靴', type: 'boots', safe: 4, ac: -1, dropRate: 1 },
@@ -406,7 +362,6 @@ const ITEMS = {
     amulet_int: { name: '智力項鍊', type: 'amulet', safe: 0, ac: 0, dropRate: 0.1, desc: '智力+1' },
     ring_wind: { name: '風靈戒指', type: 'ring', safe: 0, ac: 0, mr: 6, dropRate: 0.15 },
     amulet_str: { name: '力量項鍊', type: 'amulet', safe: 0, ac: 0, dropRate: 0.3, desc: '力量+1' },
-    amulet_hidden_valley: { name: '隱藏之谷項鍊', type: 'amulet', safe: 0, ac: 0, hp: 5, mp: 5, dropRate: 100, unique: true, desc: 'HP+5 / MP+5' },
     scroll_weapon: { name: '對武器施法的卷軸', type: 'scroll', target: 'weapon', isBlessed: false, price: 75000 },
     scroll_weapon_blessed: { name: '受祝福的對武器施法的卷軸', type: 'scroll', target: 'weapon', isBlessed: true },
     scroll_armor: { name: '對盔甲施法的卷軸', type: 'scroll', target: 'armor', isBlessed: false, price: 30000 },
@@ -524,49 +479,6 @@ const SPELLS = {
 const REMOVED_SYSTEM_ITEM_PATTERNS = ['傳送', '瞬移', '變形', '變身'];
 const REMOVED_SYSTEM_ITEM_IDS = ['scroll_teleport', 'scroll_blessed_teleport', 'scroll_polymorph', 'ring_teleport_control', 'ring_polymorph_control'];
 
-const CLASSES = {
-    knight: {
-        name: '騎士',
-        desc: '高體力與穩定近戰，具備防禦訓練與武器熟練，適合掛高傷害怪物與長時間推王。',
-        baseStats: { str: 16, dex: 12, con: 14, int: 8, wis: 9 },
-        createPoints: 16,
-        hpBase: 18, hpPerLevel: 11, mpBase: 4, mpPerLevel: 1,
-        spellMaxLevel: 5,
-        allowedWeaponClasses: ['melee'],
-        meleeDmgBonusEvery: 10,
-        drBase: 1,
-        drEvery: 12,
-        bossDmgBonus: 0.15
-    },
-    elf: {
-        name: '妖精',
-        desc: '擅長弓箭與敏捷命中，掛一般怪效率高，能使用部分輔助魔法。',
-        baseStats: { str: 11, dex: 12, con: 12, int: 12, wis: 12 },
-        createPoints: 16,
-        hpBase: 14, hpPerLevel: 7, mpBase: 8, mpPerLevel: 3,
-        spellMaxLevel: 6,
-        allowedWeaponClasses: ['melee', 'bow']
-    },
-    wizard: {
-        name: '法師',
-        desc: '魔法輸出與輔助最完整，體力低但魔力成長最高。',
-        baseStats: { str: 8, dex: 7, con: 12, int: 12, wis: 12 },
-        createPoints: 24,
-        hpBase: 10, hpPerLevel: 5, mpBase: 16, mpPerLevel: 7,
-        spellMaxLevel: 10,
-        allowedWeaponClasses: ['melee']
-    },
-    dark_elf: {
-        name: '黑暗妖精',
-        desc: '高爆發近戰，適合爪與雙刀，單體輸出高但生存較吃裝備。',
-        baseStats: { str: 12, dex: 15, con: 8, int: 11, wis: 10 },
-        createPoints: 19,
-        hpBase: 13, hpPerLevel: 7, mpBase: 8, mpPerLevel: 3,
-        spellMaxLevel: 4,
-        allowedWeaponClasses: ['melee', 'claw', 'dual_blade']
-    }
-};
-
 const GEM_EXCHANGES = {
     kalip_basic: {
         name: '卡立普的袋子',
@@ -605,19 +517,6 @@ const GEM_EXCHANGES = {
 };
 
 const MAPS = {
-    hidden_valley: { name: '隱藏之谷', monsters: [
-        { id: 'hv_orc_zombie', name: '弱化妖魔殭屍', level: 4, hp: 45, mp: 25, ac: 8, alignment: -7, size: 'small', exp: 17, atkSpeed: 2200, dice: '1d6+1', weight: 96, adena: [8,18], adenaAlways: true, drops: [{id:'potion_red', rate: 10}, {id:'potion_orange', rate: 3}, {id:'potion_haste', rate: 1}] },
-        { id: 'hv_crocodile', name: '弱化鱷魚', level: 4, hp: 25, mp: 10, ac: 8, alignment: -4, size: 'small', exp: 17, atkSpeed: 2200, dice: '1d5+1', weight: 96, adena: [8,18], adenaAlways: true, drops: [{id:'potion_red', rate: 10}, {id:'potion_orange', rate: 2}, {id:'potion_haste', rate: 1}] },
-        { id: 'hv_lizardman', name: '弱化蜥蜴人', level: 6, hp: 35, mp: 10, ac: 7, alignment: -7, size: 'small', exp: 37, atkSpeed: 2100, dice: '1d6+2', weight: 92, adena: [12,28], adenaAlways: true, drops: [{id:'potion_red', rate: 12}, {id:'potion_orange', rate: 3}, {id:'potion_haste', rate: 1.2}] },
-        { id: 'hv_ghoul', name: '弱化食屍鬼', level: 7, hp: 65, mp: 0, ac: 4, alignment: -9, size: 'small', exp: 50, atkSpeed: 2200, dice: '1d8+2', weight: 88, adena: [16,36], adenaAlways: true, drops: [{id:'potion_red', rate: 12}, {id:'potion_orange', rate: 4}, {id:'potion_haste', rate: 1.5}] },
-        { id: 'hv_lamia', name: '弱化蛇女', level: 7, hp: 65, mp: 30, ac: 5, alignment: -9, size: 'large', exp: 50, atkSpeed: 2100, dice: '1d8+2', weight: 88, adena: [16,36], adenaAlways: true, drops: [{id:'potion_red', rate: 12}, {id:'potion_orange', rate: 4}, {id:'potion_haste', rate: 1.5}] },
-        { id: 'hv_crabman', name: '弱化蟹人', level: 8, hp: 75, mp: 0, ac: 4, alignment: -10, size: 'small', exp: 65, atkSpeed: 2100, dice: '1d8+3', weight: 84, adena: [20,45], adenaAlways: true, drops: [{id:'potion_red', rate: 14}, {id:'potion_orange', rate: 5}, {id:'potion_haste', rate: 2}] },
-        { id: 'hv_beholder', name: '弱化多眼怪', level: 8, hp: 45, mp: 20, ac: 6, alignment: -10, size: 'large', exp: 65, atkSpeed: 2000, dice: '1d8+2', weight: 84, adena: [20,45], adenaAlways: true, drops: [{id:'potion_red', rate: 14}, {id:'potion_orange', rate: 5}, {id:'potion_haste', rate: 2}] },
-        { id: 'hv_troll', name: '弱化食人妖精', level: 9, hp: 90, mp: 30, ac: 3, alignment: -10, size: 'large', exp: 82, atkSpeed: 2100, dice: '1d10+3', weight: 78, adena: [25,58], adenaAlways: true, drops: [{id:'potion_red', rate: 16}, {id:'potion_orange', rate: 6}, {id:'potion_haste', rate: 2.5}] },
-        { id: 'hv_black_knight', name: '弱化黑騎士', level: 5, hp: 55, mp: 0, ac: 6, alignment: -7, size: 'small', exp: 26, atkSpeed: 2100, dice: '1d7+2', weight: 72, adena: [10,24], adenaAlways: true, drops: [{id:'potion_red', rate: 12}, {id:'potion_orange', rate: 3}, {id:'potion_haste', rate: 1}, {id:'cloak_protector', rate: 0.1}] },
-        { id: 'hv_ogre', name: '弱化歐吉', level: 9, hp: 95, mp: 0, ac: 3, alignment: -10, size: 'large', exp: 82, atkSpeed: 2300, dice: '1d10+4', weight: 54, adena: [25,62], adenaAlways: true, drops: [{id:'potion_red', rate: 16}, {id:'potion_orange', rate: 6}, {id:'potion_haste', rate: 2.5}, {id:'gloves_str', rate: 0.01}] },
-        { id: 'hv_cursed_aruba', name: '受詛咒的阿魯巴', level: 11, hp: 120, mp: 50, ac: 0, alignment: -15, size: 'large', exp: 122, atkSpeed: 1800, dice: '2d8+5', hitBonus: 2, isBoss: true, weight: 8, adena: [38,90], adenaAlways: true, drops: [{id:'amulet_hidden_valley', rate: 100}, {id:'potion_orange', rate: 20}, {id:'potion_clear', rate: 8}, {id:'potion_haste', rate: 8}] }
-    ]},
     knight_village: { name: '騎士村周邊', monsters: [
         { id: 'goblin', name: '哥布林', level: 2, hp: 3, ac: 10, exp: 5, atkSpeed: 2000, dice: '1d4', weight: 98, adena: [10,30], drops: [{id:'broadsword', rate: 1}, {id:'book_light', rate: 1}, {id:'book_shield', rate: 0.5}] },
         { id: 'orc', name: '妖魔', level: 2, hp: 6, ac: 10, exp: 5, atkSpeed: 2000, dice: '1d4', weight: 98, adena: [10,30], drops: [{id:'dagger_orc', rate: 1}, {id:'short_sword_orc', rate: 5}, {id:'helm_orc', rate: 1}, {id:'ring_mail_orc', rate: 5}, {id:'book_light', rate: 1}] },
@@ -746,8 +645,8 @@ const MAPS = {
         { id: 'skeleton_fighter', name: '骷髏鬥士', level: 29, hp: 280, ac: -15, exp: 842, atkSpeed: 2000, dice: '3d10+10', hitBonus: 5, isUndead: true, weight: 71, adena: [70,210], drops: [{id:'ring', rate: 0.8}, {id:'book_dex', rate: 0.5}, {id:'book_haste', rate: 0.1}, {id:'battle_axe', rate: 2}, {id:'antic_cloak', rate: 1}, {id:'shield_large', rate: 3}] },
         { id: 'scorpion', name: '毒蠍', level: 26, hp: 200, ac: -15, exp: 677, atkSpeed: 2000, dice: '4d6+12', hitBonus: 5, weight: 74, adena: [60,150], drops: [{id:'helm_dex_magic', rate: 0.5}, {id:'book_call_lightning', rate: 0.8}, {id:'book_cancel', rate: 0.1}, {id:'book_quake', rate: 0.05}] },
         { id: 'arian', name: '亞力安', level: 34, hp: 500, ac: -20, exp: 1157, atkSpeed: 2000, dice: '4d8+8', hitBonus: 7, weight: 66, adena: [0,0], drops: [{id:'book_high_heal', rate: 0.5}, {id:'book_slow', rate: 0.5}, {id:'book_earth_prison', rate: 0.6}, {id:'book_haste', rate: 0.1}, {id:'book_earth', rate: 0.1}, {id:'book_quake', rate: 0.05}, {id:'book_greater_haste', rate: 0.1}] },
-        { id: 'harpy', name: '哈維', level: 26, hp: 230, ac: -18, exp: 677, atkSpeed: 1000, dice: '2d8+8', hitBonus: 9, weight: 74, adena: [118,198], drops: [{id:'book_vampire', rate: 0.5}, {id:'book_haste', rate: 0.1}, {id:'book_greater_haste', rate: 0.1}, {id:'ring_harpy', rate: 0.01}, {id:'bow_hunter', rate: 1}, {id:'crossbow', rate: 0.4}] },
-        { id: 'black_elder', name: '黑長者', level: 50, hp: 1500, ac: -45, mr: 90, exp: 2501, atkSpeed: 2000, dice: '6d8+8', hitBonus: 16, isBoss: true, weight: 26, adena: [0,0], drops: [{id:'hammer_thor', rate: 0.005}, {id:'robe_black_elder', rate: 0.05}, {id:'sandals_black_elder', rate: 0.05}, {id:'book_blizzard', rate: 0.1}, {id:'book_tornado', rate: 0.1}, {id:'helm_antic_magic', rate: 0.1}, {id:'antic_cloak', rate: 1}, {id:'gloves_normal', rate: 1}, {id:'claw_dark', rate: 0.2}, {id:'dual_blade_dark', rate: 0.2}] },
+        { id: 'harpy', name: '哈維', level: 26, hp: 230, ac: -18, exp: 677, atkSpeed: 1000, dice: '2d8+8', hitBonus: 9, weight: 74, adena: [118,198], drops: [{id:'book_vampire', rate: 0.5}, {id:'book_haste', rate: 0.1}, {id:'book_greater_haste', rate: 0.1}, {id:'ring_harpy', rate: 0.01}] },
+        { id: 'black_elder', name: '黑長者', level: 50, hp: 1500, ac: -45, mr: 90, exp: 2501, atkSpeed: 2000, dice: '6d8+8', hitBonus: 16, isBoss: true, weight: 26, adena: [0,0], drops: [{id:'hammer_thor', rate: 0.005}, {id:'robe_black_elder', rate: 0.05}, {id:'sandals_black_elder', rate: 0.05}, {id:'book_blizzard', rate: 0.1}, {id:'book_tornado', rate: 0.1}, {id:'helm_antic_magic', rate: 0.1}, {id:'antic_cloak', rate: 1}, {id:'gloves_normal', rate: 1}] },
         { id: 'wyrm', name: '飛龍', level: 48, hp: 1800, ac: -45, mr: 70, exp: 5777, atkSpeed: 2000, dice: '7d8+10', hitBonus: 18, weight: 24, adena: [0,0], drops: [{id:'dagger_ori', rate: 0.1}, {id:'book_fireball', rate: 0.5}, {id:'book_weapon_break', rate: 0.4}, {id:'book_tame', rate: 0.3}, {id:'book_str_buff', rate: 0.1}, {id:'book_haste', rate: 0.1}, {id:'book_summon', rate: 0.02}, {id:'book_greater_haste', rate: 0.1}, {id:'book_quake', rate: 0.05}, {id:'wyrm_claw', rate: 0.5}, {id:'gem_high_ruby', rate: 0.3}, {id:'gem_high_sapphire', rate: 0.3}] }
     ]},
     dragon_valley_1f: { name: '龍之谷地監1樓', monsters: [
@@ -816,284 +715,14 @@ const MAPS = {
     ]}
 };
 
-Object.assign(ITEMS, {
-    sword_red_knight: { name: '紅騎士之劍', type: 'weapon', hands: 1, speed: 950, safe: 6, dice: '1d9', hit: 1, dropRate: 0.2, desc: '騎士任務獎勵改為掉落。' },
-    shield_red_knight: { name: '紅騎士盾牌', type: 'shield', safe: 4, ac: -2, dropRate: 0.2, desc: '騎士任務獎勵改為掉落。' },
-    sword_silver_long: { name: '銀長劍', type: 'weapon', hands: 1, speed: 1000, safe: 6, dice: '1d8', hit: 1, isUndeadSlayer: true, dropRate: 0.4 },
-    sword_mail_breaker: { name: '破甲之劍', type: 'weapon', hands: 1, speed: 1000, safe: 6, dice: '1d12', hit: 2, dropRate: 0.08, legendary: true },
-    sword_silence: { name: '沉默之劍', type: 'weapon', hands: 1, speed: 1000, safe: 6, dice: '1d11', hit: 1, dropRate: 0.08, legendary: true },
-    bow_elven: { name: '妖精弓', type: 'weapon', weaponClass: 'bow', hands: 2, speed: 900, safe: 6, dice: '1d7', hit: 3, dropRate: 0.5, desc: '妖精任務獎勵改為掉落。' },
-    bow_flame: { name: '赤焰之弓', type: 'weapon', weaponClass: 'bow', hands: 2, speed: 900, safe: 6, dice: '1d12', hit: 4, dropRate: 0.08, legendary: true },
-    bow_moon: { name: '沙哈之弓', type: 'weapon', weaponClass: 'bow', hands: 2, speed: 850, safe: 6, dice: '1d14', hit: 6, dmg: 5, dropRate: 0.04, legendary: true },
-    shield_elven: { name: '精靈盾牌', type: 'shield', safe: 6, ac: -2, mr: 2, dropRate: 0.5, desc: '妖精任務獎勵改為掉落。' },
-    cloak_elven: { name: '精靈斗篷', type: 'cloak', safe: 6, ac: -1, mr: 5, dropRate: 0.5, desc: '妖精任務獎勵改為掉落。' },
-    armor_elven_chain: { name: '精靈鏈甲', type: 'armor', safe: 6, ac: -5, mr: 4, dropRate: 0.4 },
-    robe_mage: { name: '法師長袍', type: 'armor', safe: 4, ac: -3, mr: 4, dropRate: 0.4, desc: '法師任務獎勵改為掉落。' },
-    staff_sorcery: { name: '巫術魔杖', type: 'weapon', hands: 1, speed: 1000, safe: 6, dice: '1d4', hit: 0, mDmg: 2, dropRate: 0.3, desc: '法師任務獎勵改為掉落。' },
-    cloak_shadow: { name: '影子斗篷', type: 'cloak', safe: 4, ac: -2, mr: 5, dropRate: 0.3, desc: '黑暗妖精任務獎勵改為掉落。' },
-    armor_shadow: { name: '影子盔甲', type: 'armor', safe: 4, ac: -6, mr: 6, dropRate: 0.25, desc: '黑暗妖精任務獎勵改為掉落。' },
-    claw_bloody: { name: '血腥鋼爪', type: 'weapon', weaponClass: 'claw', hands: 1, speed: 800, safe: 6, dice: '1d14', hit: 3, dropRate: 0.08, legendary: true },
-    dual_blade_bloody: { name: '血腥雙刀', type: 'weapon', weaponClass: 'dual_blade', hands: 1, speed: 740, safe: 6, dice: '1d12', hit: 4, dropRate: 0.08, legendary: true },
-    blade_ronde: { name: '倫得雙刀', type: 'weapon', weaponClass: 'dual_blade', hands: 1, speed: 730, safe: 6, dice: '1d13', hit: 5, dropRate: 0.03, legendary: true },
-    ring_abyss: { name: '深淵戒指', type: 'ring', safe: 0, ac: 0, mr: 8, dropRate: 0.03, legendary: true },
-    earring_freedom: { name: '自由耳環', type: 'earring', safe: 0, ac: -1, mr: 5, dropRate: 0.04, legendary: true },
-    helm_darkness: { name: '黑暗頭飾', type: 'helmet', safe: 4, ac: -2, mr: 4, dropRate: 0.2 },
-    gauntlet_dark: { name: '黑暗手套', type: 'gloves', safe: 4, ac: -1, dropRate: 0.2, desc: '黑暗妖精任務獎勵改為掉落。' },
-    crystal_elf_resist_magic: { name: '精靈水晶(魔法防禦)', type: 'book', spellId: 'elf_resist_magic', price: 15000 },
-    crystal_elf_body_to_mind: { name: '精靈水晶(魂體轉換)', type: 'book', spellId: 'elf_body_to_mind', price: 20000 },
-    crystal_elf_triple_arrow: { name: '精靈水晶(三重矢)', type: 'book', spellId: 'elf_triple_arrow', price: 30000 },
-    crystal_elf_clear_mind: { name: '精靈水晶(淨化精神)', type: 'book', spellId: 'elf_clear_mind', price: 40000 },
-    crystal_elf_fire_weapon: { name: '精靈水晶(火焰武器)', type: 'book', spellId: 'elf_fire_weapon' },
-    crystal_elf_wind_shot: { name: '精靈水晶(風之神射)', type: 'book', spellId: 'elf_wind_shot' },
-    crystal_elf_earth_skin: { name: '精靈水晶(大地防護)', type: 'book', spellId: 'elf_earth_skin' },
-    crystal_elf_water_life: { name: '精靈水晶(水之元氣)', type: 'book', spellId: 'elf_water_life' },
-    crystal_elf_storm_shot: { name: '精靈水晶(暴風神射)', type: 'book', spellId: 'elf_storm_shot' },
-    crystal_elf_iron_skin: { name: '精靈水晶(鋼鐵防護)', type: 'book', spellId: 'elf_iron_skin' },
-    crystal_elf_elemental_fire: { name: '精靈水晶(烈焰之魂)', type: 'book', spellId: 'elf_elemental_fire' },
-    crystal_dark_enchant_venom: { name: '黑暗精靈水晶(附加劇毒)', type: 'book', spellId: 'de_enchant_venom', price: 20000 },
-    crystal_dark_shadow_armor: { name: '黑暗精靈水晶(暗影防護)', type: 'book', spellId: 'de_shadow_armor', price: 30000 },
-    crystal_dark_burning_spirit: { name: '黑暗精靈水晶(燃燒鬥志)', type: 'book', spellId: 'de_burning_spirit' },
-    crystal_dark_shadow_fang: { name: '黑暗精靈水晶(暗影之牙)', type: 'book', spellId: 'de_shadow_fang' },
-    crystal_dark_uncanny_dodge: { name: '黑暗精靈水晶(暗影閃避)', type: 'book', spellId: 'de_uncanny_dodge' },
-    crystal_dark_double_break: { name: '黑暗精靈水晶(雙重破壞)', type: 'book', spellId: 'de_double_break' },
-    crystal_dark_dress_mighty: { name: '黑暗精靈水晶(力量提升)', type: 'book', spellId: 'de_dress_mighty' },
-    book_knight_shock_stun: { name: '技術書(衝擊之暈)', type: 'book', spellId: 'knight_shock_stun' },
-    book_knight_reduction_armor: { name: '技術書(增幅防禦)', type: 'book', spellId: 'knight_reduction_armor' },
-    book_knight_solid_carriage: { name: '技術書(堅固防護)', type: 'book', spellId: 'knight_solid_carriage' },
-    book_knight_counter_barrier: { name: '技術書(反擊屏障)', type: 'book', spellId: 'knight_counter_barrier' }
-});
-
-Object.assign(SPELLS, {
-    elf_resist_magic: { id: 'elf_resist_magic', name: '魔法防禦', level: 1, type: 'buff', mp: 5, duration: 1200, classes: ['elf'] },
-    elf_body_to_mind: { id: 'elf_body_to_mind', name: '魂體轉換', level: 2, type: 'passive', mp: 0, classes: ['elf'] },
-    elf_triple_arrow: { id: 'elf_triple_arrow', name: '三重矢', level: 3, type: 'buff', mp: 10, duration: 600, classes: ['elf'] },
-    elf_clear_mind: { id: 'elf_clear_mind', name: '淨化精神', level: 3, type: 'buff', mp: 10, duration: 1200, classes: ['elf'] },
-    elf_fire_weapon: { id: 'elf_fire_weapon', name: '火焰武器', level: 4, type: 'buff', mp: 15, duration: 1200, classes: ['elf'] },
-    elf_wind_shot: { id: 'elf_wind_shot', name: '風之神射', level: 4, type: 'buff', mp: 15, duration: 1200, classes: ['elf'] },
-    elf_earth_skin: { id: 'elf_earth_skin', name: '大地防護', level: 4, type: 'buff', mp: 15, duration: 1200, classes: ['elf'] },
-    elf_water_life: { id: 'elf_water_life', name: '水之元氣', level: 4, type: 'buff', mp: 20, duration: 600, classes: ['elf'] },
-    elf_storm_shot: { id: 'elf_storm_shot', name: '暴風神射', level: 5, type: 'buff', mp: 20, duration: 1200, classes: ['elf'] },
-    elf_iron_skin: { id: 'elf_iron_skin', name: '鋼鐵防護', level: 5, type: 'buff', mp: 25, duration: 1200, classes: ['elf'] },
-    elf_elemental_fire: { id: 'elf_elemental_fire', name: '烈焰之魂', level: 6, type: 'buff', mp: 30, duration: 1200, classes: ['elf'] },
-    de_enchant_venom: { id: 'de_enchant_venom', name: '附加劇毒', level: 1, type: 'buff', mp: 8, duration: 1200, classes: ['dark_elf'] },
-    de_shadow_armor: { id: 'de_shadow_armor', name: '暗影防護', level: 2, type: 'buff', mp: 10, duration: 1200, classes: ['dark_elf'] },
-    de_burning_spirit: { id: 'de_burning_spirit', name: '燃燒鬥志', level: 3, type: 'buff', mp: 20, duration: 600, classes: ['dark_elf'] },
-    de_shadow_fang: { id: 'de_shadow_fang', name: '暗影之牙', level: 3, type: 'buff', mp: 20, duration: 1200, classes: ['dark_elf'] },
-    de_uncanny_dodge: { id: 'de_uncanny_dodge', name: '暗影閃避', level: 4, type: 'buff', mp: 25, duration: 600, classes: ['dark_elf'] },
-    de_double_break: { id: 'de_double_break', name: '雙重破壞', level: 4, type: 'buff', mp: 30, duration: 600, classes: ['dark_elf'] },
-    de_dress_mighty: { id: 'de_dress_mighty', name: '力量提升', level: 4, type: 'buff', mp: 25, duration: 1200, classes: ['dark_elf'] },
-    knight_shock_stun: { id: 'knight_shock_stun', name: '衝擊之暈', level: 3, type: 'attack', mp: 15, duration: 3, classes: ['knight'] },
-    knight_reduction_armor: { id: 'knight_reduction_armor', name: '增幅防禦', level: 3, type: 'buff', mp: 10, duration: 1200, classes: ['knight'] },
-    knight_solid_carriage: { id: 'knight_solid_carriage', name: '堅固防護', level: 4, type: 'buff', mp: 15, duration: 600, classes: ['knight'] },
-    knight_counter_barrier: { id: 'knight_counter_barrier', name: '反擊屏障', level: 5, type: 'buff', mp: 20, duration: 600, classes: ['knight'] }
-});
-
-Object.assign(MAPS, {
-    giant_ant_cave: { name: '巨蟻洞穴', monsters: [
-        { id: 'giant_ant', name: '巨大螞蟻', level: 22, hp: 220, ac: -8, exp: 500, atkSpeed: 1800, dice: '3d8+6', hitBonus: 4, weight: 70, adena: [80,180], drops: [{id:'gem_diamond', rate: 2}, {id:'gem_quality_diamond', rate: 0.4}, {id:'shield_elven', rate: 0.2}] },
-        { id: 'giant_ant_soldier', name: '巨大兵蟻', level: 28, hp: 420, ac: -18, exp: 820, atkSpeed: 1700, dice: '4d8+8', hitBonus: 6, weight: 62, adena: [140,260], drops: [{id:'armor_elven_chain', rate: 0.15}, {id:'gem_diamond', rate: 2}, {id:'gem_quality_diamond', rate: 0.5}] },
-        { id: 'giant_ant_queen', name: '巨大蟻后', level: 58, hp: 9000, ac: -62, mr: 60, exp: 5200, atkSpeed: 1600, dice: '7d10+20', hitBonus: 24, isBoss: true, weight: 8, adena: [900,1800], drops: [{id:'ring_abyss', rate: 0.12}, {id:'scroll_armor_blessed', rate: 0.2}, {id:'gem_high_diamond', rate: 1}] }
-    ]},
-    pirate_island: { name: '海賊島', monsters: [
-        { id: 'kiwi_parrot', name: '奇異鸚鵡', level: 42, hp: 720, ac: -28, exp: 1700, atkSpeed: 1400, dice: '4d10+10', hitBonus: 12, weight: 70, adena: [190,330], drops: [{id:'potion_haste', rate: 3}, {id:'gem_emerald', rate: 2}] },
-        { id: 'pirate_skeleton', name: '海賊骷髏', level: 48, hp: 1000, ac: -36, exp: 2200, atkSpeed: 1600, dice: '5d10+12', hitBonus: 15, isUndead: true, weight: 65, adena: [260,430], drops: [{id:'sword_silver_long', rate: 0.4}, {id:'dagger_ori', rate: 0.08}, {id:'crystal_elf_wind_shot', rate: 0.15}] },
-        { id: 'lizardman_warrior', name: '蜥蜴人戰士', level: 52, hp: 1350, ac: -42, exp: 2700, atkSpeed: 1700, dice: '6d10+14', hitBonus: 17, weight: 58, adena: [320,560], drops: [{id:'silver_sword', rate: 1}, {id:'helm_antic_magic', rate: 0.4}, {id:'crystal_dark_burning_spirit', rate: 0.12}] },
-        { id: 'drake_pirate', name: '海賊島飛龍', level: 68, hp: 9000, ac: -66, mr: 70, exp: 6100, atkSpeed: 1500, dice: '8d10+22', hitBonus: 27, isBoss: true, weight: 12, adena: [900,1900], drops: [{id:'bow_flame', rate: 0.15}, {id:'crystal_elf_storm_shot', rate: 0.25}, {id:'gem_high_ruby', rate: 0.8}] }
-    ]},
-    underwater_tunnel: { name: '地底湖與海底隧道', monsters: [
-        { id: 'shellman', name: '貝殼人', level: 50, hp: 1200, ac: -40, exp: 2450, atkSpeed: 1900, dice: '5d12+12', hitBonus: 15, weight: 70, adena: [280,460], drops: [{id:'eva_shield', rate: 0.08}, {id:'gem_sapphire', rate: 3}, {id:'crystal_elf_water_life', rate: 0.12}] },
-        { id: 'mermaid', name: '人魚', level: 54, hp: 1300, ac: -42, mr: 45, exp: 2850, atkSpeed: 1600, dice: '5d12+16', hitBonus: 17, weight: 64, adena: [320,520], drops: [{id:'cloak_elven', rate: 0.12}, {id:'gem_quality_sapphire', rate: 0.8}, {id:'crystal_elf_water_life', rate: 0.18}] },
-        { id: 'deep_sea_horror', name: '深海恐怖', level: 70, hp: 11000, ac: -70, mr: 75, exp: 6400, atkSpeed: 1500, dice: '8d12+24', hitBonus: 28, isBoss: true, weight: 10, adena: [1000,2100], drops: [{id:'earring_freedom', rate: 0.12}, {id:'water_dragon_scale', rate: 2}, {id:'gem_high_sapphire', rate: 1}] }
-    ]},
-    elven_grave: { name: '精靈墓穴', monsters: [
-        { id: 'spirit_guardian', name: '精靈守護者', level: 55, hp: 1600, ac: -46, mr: 65, exp: 3100, atkSpeed: 1700, dice: '6d10+16', hitBonus: 19, weight: 55, adena: [360,650], drops: [{id:'bow_elven', rate: 0.25}, {id:'shield_elven', rate: 0.2}, {id:'crystal_elf_fire_weapon', rate: 0.18}] },
-        { id: 'ancient_elf', name: '古代精靈', level: 62, hp: 2600, ac: -54, mr: 80, exp: 4000, atkSpeed: 1700, dice: '7d10+18', hitBonus: 22, weight: 45, adena: [480,850], drops: [{id:'armor_elven_chain', rate: 0.2}, {id:'crystal_elf_iron_skin', rate: 0.18}, {id:'crystal_elf_elemental_fire', rate: 0.08}] },
-        { id: 'spirit_elder', name: '精靈長老', level: 74, hp: 13000, ac: -74, mr: 90, exp: 7000, atkSpeed: 1600, dice: '8d12+26', hitBonus: 30, isBoss: true, weight: 8, adena: [1200,2400], drops: [{id:'bow_moon', rate: 0.12}, {id:'crystal_elf_elemental_fire', rate: 0.25}, {id:'gem_high_emerald', rate: 1}] }
-    ]},
-    shadow_temple: { name: '暗影神殿', monsters: [
-        { id: 'shadow_beast', name: '影子魔獸', level: 58, hp: 1800, ac: -50, mr: 70, exp: 3600, atkSpeed: 1500, dice: '7d10+18', hitBonus: 22, weight: 48, adena: [420,760], drops: [{id:'cloak_shadow', rate: 0.18}, {id:'crystal_dark_shadow_armor', rate: 0.18}, {id:'gem_quality_diamond', rate: 0.8}] },
-        { id: 'cursed_dark_elf_fighter', name: '受詛咒的黑暗妖精鬥士', level: 62, hp: 2400, ac: -56, mr: 75, exp: 4300, atkSpeed: 1300, dice: '7d12+20', hitBonus: 26, weight: 42, adena: [500,900], drops: [{id:'claw_bloody', rate: 0.12}, {id:'crystal_dark_burning_spirit', rate: 0.25}, {id:'crystal_dark_shadow_fang', rate: 0.18}] },
-        { id: 'succubus_queen', name: '思克巴女皇', level: 70, hp: 12000, ac: -72, mr: 90, exp: 6600, atkSpeed: 1500, dice: '8d10+26', hitBonus: 30, isBoss: true, weight: 8, adena: [1200,2400], drops: [{id:'crystal_dark_uncanny_dodge', rate: 0.35}, {id:'ring_abyss', rate: 0.12}, {id:'gem_high_diamond', rate: 1}] }
-    ]},
-    lastavard: { name: '拉斯塔巴德地下洞穴', monsters: [
-        { id: 'dark_black_knight', name: '暗黑黑騎士', level: 64, hp: 2800, ac: -58, mr: 65, exp: 4600, atkSpeed: 1500, dice: '7d12+22', hitBonus: 25, weight: 38, adena: [560,980], drops: [{id:'book_knight_reduction_armor', rate: 0.25}, {id:'book_knight_solid_carriage', rate: 0.18}, {id:'sword_red_knight', rate: 0.15}] },
-        { id: 'dark_elf_mage', name: '黑暗妖精法師', level: 66, hp: 2400, ac: -56, mr: 90, exp: 4800, atkSpeed: 1800, dice: '7d10+24', hitBonus: 24, weight: 36, adena: [600,1050], drops: [{id:'staff_sorcery', rate: 0.15}, {id:'robe_mage', rate: 0.15}, {id:'crystal_dark_dress_mighty', rate: 0.18}] },
-        { id: 'elite_black_knight', name: '菁英黑騎士', level: 72, hp: 7000, ac: -72, mr: 75, exp: 6800, atkSpeed: 1400, dice: '8d12+28', hitBonus: 31, isBoss: true, weight: 12, adena: [1100,2200], drops: [{id:'book_knight_shock_stun', rate: 0.35}, {id:'crystal_dark_double_break', rate: 0.35}, {id:'dual_blade_bloody', rate: 0.12}] },
-        { id: 'lord_of_lastavard', name: '拉斯塔巴德將軍', level: 82, hp: 26000, ac: -86, mr: 95, exp: 8000, atkSpeed: 1500, dice: '9d12+32', hitBonus: 34, isBoss: true, weight: 4, adena: [1700,3400], drops: [{id:'book_knight_counter_barrier', rate: 0.25}, {id:'blade_ronde', rate: 0.08}, {id:'crystal_dark_double_break', rate: 0.5}, {id:'scroll_weapon_blessed', rate: 0.5}] }
-    ]},
-    demon_temple: { name: '魔族神殿', monsters: [
-        { id: 'chaos_guardian', name: '混沌守護者', level: 68, hp: 4200, ac: -66, mr: 85, exp: 5600, atkSpeed: 1600, dice: '8d10+24', hitBonus: 28, weight: 25, adena: [760,1400], drops: [{id:'sword_mail_breaker', rate: 0.1}, {id:'crystal_elf_storm_shot', rate: 0.15}, {id:'crystal_dark_shadow_fang', rate: 0.15}] },
-        { id: 'death_sword_unlucky', name: '不幸的死亡之劍', level: 70, hp: 6000, ac: -70, mr: 80, exp: 6200, atkSpeed: 1300, dice: '8d12+26', hitBonus: 30, weight: 18, adena: [900,1700], drops: [{id:'sword_silence', rate: 0.1}, {id:'crystal_dark_burning_spirit', rate: 0.3}, {id:'book_knight_shock_stun', rate: 0.15}] },
-        { id: 'mammoth', name: '猛瑪象', level: 76, hp: 14000, ac: -76, mr: 65, exp: 7200, atkSpeed: 2000, dice: '9d12+30', hitBonus: 30, isBoss: true, weight: 8, adena: [1200,2400], drops: [{id:'book_knight_counter_barrier', rate: 0.18}, {id:'crystal_elf_iron_skin', rate: 0.3}, {id:'gem_high_diamond', rate: 1}] }
-    ]}
-});
-
-const DROP_PATCHES = {
-    goblin: [{id:'crystal_elf_resist_magic', rate: 0.2}],
-    orc_fighter: [{id:'sword_red_knight', rate: 0.15}, {id:'shield_red_knight', rate: 0.15}, {id:'book_knight_reduction_armor', rate: 0.05}],
-    black_knight: [{id:'book_knight_shock_stun', rate: 0.12}, {id:'book_knight_reduction_armor', rate: 0.12}, {id:'sword_red_knight', rate: 0.12}],
-    death_knight: [{id:'book_knight_counter_barrier', rate: 0.18}, {id:'book_knight_shock_stun', rate: 0.18}, {id:'shield_red_knight', rate: 0.18}],
-    elder: [{id:'robe_mage', rate: 0.18}, {id:'staff_sorcery', rate: 0.18}],
-    black_elder: [{id:'robe_mage', rate: 0.2}, {id:'staff_sorcery', rate: 0.2}, {id:'crystal_dark_uncanny_dodge', rate: 0.18}],
-    harpy: [{id:'bow_elven', rate: 0.25}, {id:'crystal_elf_wind_shot', rate: 0.15}],
-    arian: [{id:'bow_elven', rate: 0.18}, {id:'shield_elven', rate: 0.18}, {id:'crystal_elf_triple_arrow', rate: 0.12}],
-    lamia: [{id:'crystal_elf_water_life', rate: 0.12}, {id:'crystal_dark_enchant_venom', rate: 0.12}],
-    doppleganger: [{id:'cloak_shadow', rate: 0.12}, {id:'armor_shadow', rate: 0.1}],
-    drake: [{id:'bow_flame', rate: 0.12}, {id:'crystal_elf_storm_shot', rate: 0.18}],
-    wyrm: [{id:'bow_yumi', rate: 0.12}, {id:'crystal_elf_iron_skin', rate: 0.12}],
-    ifrit: [{id:'crystal_elf_fire_weapon', rate: 0.25}, {id:'crystal_elf_elemental_fire', rate: 0.12}],
-    succubus: [{id:'crystal_dark_shadow_armor', rate: 0.15}, {id:'crystal_dark_uncanny_dodge', rate: 0.08}],
-    succubus_queen: [{id:'crystal_dark_uncanny_dodge', rate: 0.25}],
-    demon: [{id:'book_knight_counter_barrier', rate: 0.12}, {id:'crystal_dark_double_break', rate: 0.18}, {id:'crystal_elf_elemental_fire', rate: 0.12}],
-    antaras: [{id:'book_knight_counter_barrier', rate: 0.4}, {id:'crystal_dark_double_break', rate: 0.5}, {id:'crystal_elf_elemental_fire', rate: 0.4}, {id:'bow_moon', rate: 0.12}, {id:'blade_ronde', rate: 0.12}]
-};
-Object.keys(MAPS).forEach(mapId => {
-    MAPS[mapId].monsters.forEach(monster => {
-        let additions = DROP_PATCHES[monster.id];
-        if (!additions) return;
-        monster.drops = monster.drops || [];
-        additions.forEach(drop => {
-            if (!monster.drops.some(existing => existing.id === drop.id)) monster.drops.push(drop);
-        });
-    });
-});
-
-Object.assign(CLASSES.knight, { spellMaxLevel: 5, magicMaxLevel: 1, magicLevelStep: 50, classMagicLevelStep: 10, allowedWeaponClasses: ['melee', 'bow'] });
-Object.assign(CLASSES.elf, { magicMaxLevel: 6, magicLevelStep: 8, classMagicLevelStep: 10, allowedWeaponClasses: ['melee', 'bow'] });
-Object.assign(CLASSES.wizard, { magicMaxLevel: 10, magicLevelStep: 4, classMagicLevelStep: 4, allowedWeaponClasses: ['melee', 'bow'] });
-Object.assign(CLASSES.dark_elf, { magicMaxLevel: 2, magicLevelStep: 12, classMagicLevelStep: 15, allowedWeaponClasses: ['melee', 'bow', 'claw', 'dual_blade'] });
-
-Object.assign(ITEMS, {
-    leather_jacket: { name: '皮夾克', type: 'armor', safe: 4, ac: -1, dropRate: 20 },
-    bow_short: { name: '短弓', type: 'weapon', weaponClass: 'bow', hands: 2, speed: 900, safe: 6, dice: '1d3', hit: 0, dmg: -1, dropRate: 3, classes: ['knight','elf','wizard'] },
-    bow_normal: { name: '弓', type: 'weapon', weaponClass: 'bow', hands: 2, speed: 900, safe: 6, dice: '1d4', hit: 0, dropRate: 3, classes: ['knight','elf','wizard'] },
-    bow_orc: { name: '歐西斯弓', type: 'weapon', weaponClass: 'bow', hands: 2, speed: 920, safe: 6, dice: '1d3', hit: -1, dmg: -1, dropRate: 3, classes: ['knight','elf','wizard'] },
-    bow_elven: { ...ITEMS.bow_elven, name: '精靈弓', dice: '1d5', hit: 0, dmg: 1, classes: ['elf'] },
-    bow_elven_dex: { name: '敏捷精靈弓', type: 'weapon', weaponClass: 'bow', hands: 2, speed: 880, safe: 6, dice: '1d6', hit: 1, dex: 1, dropRate: 0.3, classes: ['elf'] },
-    bow_ivory_long: { name: '象牙塔長弓', type: 'weapon', weaponClass: 'bow', hands: 2, speed: 900, safe: 0, dice: '1d4', hit: 1, dropRate: 0.5, classes: ['elf'] },
-    crossbow_ivory: { name: '象牙塔石弓', type: 'weapon', weaponClass: 'bow', hands: 2, speed: 950, safe: 0, dice: '1d5', hit: 1, dropRate: 0.5, classes: ['knight','elf','dark_elf'] },
-    bow_lastabad: { name: '拉斯塔巴德弓', type: 'weapon', weaponClass: 'bow', hands: 2, speed: 900, safe: 6, dice: '1d6', hit: 2, dmg: 2, dropRate: 0.2, classes: ['knight','elf'] },
-    crossbow: { ...ITEMS.crossbow, name: '十字弓', dice: '1d7', hit: 3, dmg: 2, classes: ['knight','elf','dark_elf'] },
-    crossbow_lastabad: { name: '拉斯塔巴德十字弓', type: 'weapon', weaponClass: 'bow', hands: 2, speed: 960, safe: 6, dice: '1d8', hit: 2, dmg: 2, dropRate: 0.2, classes: ['elf','dark_elf'] },
-    crossbow_diad: { name: '狄亞得十字弓', type: 'weapon', weaponClass: 'bow', hands: 2, speed: 950, safe: 6, dice: '1d9', hit: 2, dmg: 1, dex: 1, dropRate: 0.12, classes: ['elf','dark_elf'] },
-    bow_yumi: { ...ITEMS.bow_yumi, hit: 1, dmg: 3, classes: ['elf'] },
-    crossbow_lastabad_heavy: { name: '拉斯塔巴德重十字弓', type: 'weapon', weaponClass: 'bow', hands: 2, speed: 1050, safe: 6, dice: '1d11', hit: 2, dmg: 3, dropRate: 0.08, classes: ['elf'] },
-    bow_sayha: { name: '沙哈之弓', type: 'weapon', weaponClass: 'bow', hands: 2, speed: 850, safe: 6, dice: '1d14', hit: 6, dmg: 5, dropRate: 0.03, legendary: true, classes: ['elf'] },
-    crossbow_dark: { name: '黑暗十字弓', type: 'weapon', weaponClass: 'bow', hands: 2, speed: 920, safe: 6, dice: '1d6', hit: 4, dropRate: 0.2, classes: ['elf','dark_elf'] },
-    crossbow_shadow: { name: '幽暗十字弓', type: 'weapon', weaponClass: 'bow', hands: 2, speed: 940, safe: 6, dice: '1d8', hit: 5, dmg: 2, dropRate: 0.12, classes: ['elf','dark_elf'] },
-    sword_damascus: { name: '大馬士革刀', type: 'weapon', hands: 1, speed: 1000, safe: 6, dice: '1d10', hit: 1, unbreakable: true, dropRate: 0.3, classes: ['knight','elf','dark_elf'], desc: '不會損壞。' },
-    sword_damascus_two_handed: { name: '大馬士革雙手劍', type: 'weapon', hands: 2, speed: 1100, safe: 6, dice: '1d24', hit: 2, unbreakable: true, dropRate: 0.12, classes: ['knight'], desc: '不會損壞，反擊屏障與衝擊之暈可用。' },
-    amulet_orc_warrior: { name: '妖魔戰士項鍊', type: 'amulet', safe: 0, ac: 0, hp: 30, dropRate: 0.5, desc: 'HP+30' },
-    elven_breastplate: { name: '精靈護胸金屬板', type: 'armor', safe: 4, ac: -5, dropRate: 3, classes: ['elf','dark_elf'] },
-    elven_wafer: { name: '精靈餅乾', type: 'potion_buff', buffId: 'potion_haste', duration: 600, price: 500, classes: ['elf'] },
-    boots_dark: { name: '黑暗長靴', type: 'boots', safe: 4, ac: -2, dropRate: 0.3, classes: ['dark_elf'] },
-    sandals_dark_elf: { name: '黑暗妖精涼鞋', type: 'boots', safe: 4, ac: -3, mpRegen: 3, dropRate: 0.1, legendary: true, classes: ['dark_elf'] },
-    quiver_normal: { name: '普通箭桶', type: 'quiver', safe: 0, arrowDmg: 0, price: 1000, desc: '無限普通箭。' },
-    quiver_silver: { name: '銀箭桶', type: 'quiver', safe: 0, arrowDmg: 0, undeadBonus: true, price: 8000, desc: '無限銀箭，對不死族與狼人追加 3~6 傷害。' },
-    quiver_mithril: { name: '米索莉箭桶', type: 'quiver', safe: 0, arrowDmg: 3, undeadBonus: true, dropRate: 0.5, desc: '無限米索莉箭，遠程傷害+3。' },
-    quiver_oriharukon: { name: '奧里哈魯根箭桶', type: 'quiver', safe: 0, arrowDmg: 5, undeadBonus: true, pierceDr: 2, dropRate: 0.08, legendary: true, desc: '遠程傷害+5，無視 2 點減傷。' },
-    quiver_black_mithril: { name: '黑色米索莉箭桶', type: 'quiver', safe: 0, arrowDmg: 7, dropRate: 0.06, legendary: true, desc: '遠程傷害+7。' },
-    quiver_ancient: { name: '古代之箭桶', type: 'quiver', safe: 0, arrowDmg: 8, magicArrow: true, dropRate: 0.04, legendary: true, desc: '古老弩槍與沙哈之弓可將箭矢轉為魔法屬性傷害。' },
-    sealed_forgotten_sword: { name: '受封印 被遺忘的劍', type: 'quest', dropRate: 0.2 },
-    sealed_forgotten_great_sword: { name: '受封印 被遺忘的巨劍', type: 'quest', dropRate: 0.2 },
-    sealed_forgotten_crossbow: { name: '受封印 被遺忘的弩槍', type: 'weapon', weaponClass: 'bow', hands: 2, speed: 950, safe: 6, dice: '1d2', hit: 0, dropRate: 0.2, classes: ['elf'] },
-    sealed_forgotten_dual_blade: { name: '受封印 被遺忘的雙刀', type: 'quest', dropRate: 0.2 },
-    sealed_forgotten_staff: { name: '受封印 被遺忘的魔杖', type: 'quest', dropRate: 0.2 },
-    sealed_forgotten_leather_armor: { name: '受封印 被遺忘的皮盔甲', type: 'quest', dropRate: 0.2 },
-    sealed_forgotten_robe_armor: { name: '受封印 被遺忘的長袍盔甲', type: 'quest', dropRate: 0.2 },
-    sealed_forgotten_metal_armor: { name: '受封印 被遺忘的金屬盔甲', type: 'quest', dropRate: 0.2 },
-    ancient_sword: { name: '古老的劍', type: 'weapon', hands: 1, speed: 980, safe: 0, dice: '1d25', hit: 5, dropRate: 0.01, legendary: true, classes: ['knight','elf','dark_elf'] },
-    ancient_great_sword: { ...ITEMS.ancient_great_sword, name: '古老的巨劍', dice: '1d35', hit: 7, safe: 0, classes: ['knight'], legendary: true },
-    ancient_crossbow: { name: '古老的弩槍', type: 'weapon', weaponClass: 'bow', hands: 1, speed: 900, safe: 6, dice: '1d8', hit: 5, dmg: 2, dropRate: 0.01, legendary: true, classes: ['elf','dark_elf'], desc: '全遊戲唯一單手弓。' },
-    ancient_dual_blade: { name: '古老的雙刀', type: 'weapon', weaponClass: 'dual_blade', hands: 1, speed: 720, safe: 0, dice: '1d17', hit: 3, dropRate: 0.01, legendary: true, classes: ['dark_elf'] },
-    ancient_staff: { name: '古老的魔杖', type: 'weapon', hands: 1, speed: 1000, safe: 0, dice: '1d13', hit: 4, mDmg: 2, dropRate: 0.01, legendary: true, classes: ['wizard'] },
-    ancient_leather_armor: { ...ITEMS.ancient_leather_armor, name: '古老的皮盔甲', ac: -14, safe: 4, str: 3, dex: 3, hp: 100, hpRegen: 4, mpRegen: 8, dr: 2, classes: ['elf','dark_elf'], legendary: true },
-    ancient_robe_armor: { name: '古老的長袍盔甲', type: 'armor', safe: 4, ac: -12, int: 3, hp: 100, mpRegen: 12, mDmg: 2, dr: 2, dropRate: 0.01, legendary: true, classes: ['wizard'] },
-    ancient_metal_armor: { name: '古老的金屬盔甲', type: 'armor', safe: 4, ac: -16, str: 3, dex: 3, hp: 150, hpRegen: 1, dr: 2, dropRate: 0.01, legendary: true, classes: ['knight'] }
-});
-
-Object.assign(SPELLS, {
-    elf_storm_eye: { id: 'elf_storm_eye', name: '暴風之眼', level: 5, type: 'buff', mp: 20, duration: 1200, classes: ['elf'] },
-    elf_release_elemental: { id: 'elf_release_elemental', name: '釋放元素', level: 5, type: 'buff', mp: 25, duration: 1200, classes: ['elf'] },
-    invisibility: { id: 'invisibility', name: '隱身術', level: 7, type: 'buff', mp: 15, duration: 600, classes: ['wizard','dark_elf'] }
-});
-Object.assign(ITEMS, {
-    crystal_elf_storm_eye: { name: '精靈水晶(暴風之眼)', type: 'book', spellId: 'elf_storm_eye' },
-    crystal_elf_release_elemental: { name: '精靈水晶(釋放元素)', type: 'book', spellId: 'elf_release_elemental' },
-    book_invisibility: { name: '魔法書(隱身術)', type: 'book', spellId: 'invisibility' }
-});
-
-Object.assign(ITEMS, {
-    bow_moon: { ...ITEMS.bow_sayha, name: '沙哈之弓' },
-    dual_bronze: { name: '青銅雙刀', type: 'weapon', weaponClass: 'dual_blade', hands: 1, speed: 760, safe: 6, dice: '1d6', hit: 5, dropRate: 1, classes: ['dark_elf'] },
-    dual_spike: { name: '尖刺雙刀', type: 'weapon', weaponClass: 'dual_blade', hands: 1, speed: 750, safe: 6, dice: '1d8', dmg: 3, dropRate: 1, classes: ['dark_elf'] },
-    dual_steel: { name: '鋼鐵雙刀', type: 'weapon', weaponClass: 'dual_blade', hands: 1, speed: 750, safe: 6, dice: '1d9', hit: 1, dropRate: 1, classes: ['dark_elf'] },
-    dual_shadow: { name: '暗影雙刀', type: 'weapon', weaponClass: 'dual_blade', hands: 1, speed: 750, safe: 6, dice: '1d10', hit: 1, dropRate: 0.4, classes: ['dark_elf'] },
-    dual_ivory: { name: '象牙塔雙刀', type: 'weapon', weaponClass: 'dual_blade', hands: 1, speed: 750, safe: 0, dice: '1d10', dropRate: 0.5, classes: ['dark_elf'] },
-    dual_silver: { name: '銀光雙刀', type: 'weapon', weaponClass: 'dual_blade', hands: 1, speed: 750, safe: 6, dice: '1d10', hit: 3, isUndeadSlayer: true, dropRate: 0.4, classes: ['dark_elf'] },
-    dual_blade_dark: { ...ITEMS.dual_blade_dark, dice: '1d12', hit: 3, safe: 6, classes: ['dark_elf'] },
-    dual_assassin_mark: { name: '暗殺軍王之痕', type: 'weapon', weaponClass: 'dual_blade', hands: 1, speed: 730, safe: 6, dice: '1d13', dmg: 2, unbreakable: true, dropRate: 0.08, legendary: true, classes: ['dark_elf'] },
-    dual_short: { name: '短雙刀', type: 'weapon', weaponClass: 'dual_blade', hands: 1, speed: 720, safe: 6, dice: '1d13', hit: 2, dropRate: 0.3, classes: ['dark_elf'] },
-    dual_abyss: { name: '深淵雙刀', type: 'weapon', weaponClass: 'dual_blade', hands: 1, speed: 740, safe: 6, dice: '1d14', dropRate: 0.2, classes: ['dark_elf'] },
-    dual_damascus: { name: '大馬士革雙刀', type: 'weapon', weaponClass: 'dual_blade', hands: 1, speed: 740, safe: 6, dice: '1d15', unbreakable: true, dropRate: 0.2, classes: ['dark_elf'] },
-    dual_lastabad: { name: '拉斯塔巴德雙刀', type: 'weapon', weaponClass: 'dual_blade', hands: 1, speed: 740, safe: 6, dice: '1d15', dropRate: 0.15, classes: ['dark_elf'] },
-    dual_shadow_high: { name: '幽暗雙刀', type: 'weapon', weaponClass: 'dual_blade', hands: 1, speed: 730, safe: 6, dice: '1d15', hit: 3, dmg: 1, unbreakable: true, dropRate: 0.1, classes: ['dark_elf'] },
-    dual_diad: { name: '狄亞得雙刀', type: 'weapon', weaponClass: 'dual_blade', hands: 1, speed: 730, safe: 6, dice: '1d16', dropRate: 0.1, classes: ['dark_elf'] },
-    dual_dark_high: { name: '暗黑雙刀', type: 'weapon', weaponClass: 'dual_blade', hands: 1, speed: 720, safe: 6, dice: '1d17', hit: 4, dmg: 3, unbreakable: true, dropRate: 0.06, legendary: true, classes: ['dark_elf'] },
-    dual_red_shadow: { name: '紅影雙刀', type: 'weapon', weaponClass: 'dual_blade', hands: 1, speed: 700, safe: 0, dice: '1d24', hit: 2, dmg: 8, wis: 1, unbreakable: true, dropRate: 0.01, legendary: true, classes: ['dark_elf'] },
-    claw_bronze: { name: '青銅鋼爪', type: 'weapon', weaponClass: 'claw', hands: 1, speed: 800, safe: 6, dice: '1d6', hit: 4, dropRate: 1, classes: ['dark_elf'] },
-    claw_steel: { name: '鋼鐵鋼爪', type: 'weapon', weaponClass: 'claw', hands: 1, speed: 800, safe: 6, dice: '1d8', hit: 1, dropRate: 1, classes: ['dark_elf'] },
-    claw_shadow: { name: '暗影鋼爪', type: 'weapon', weaponClass: 'claw', hands: 1, speed: 800, safe: 6, dice: '1d10', hit: 1, dropRate: 0.4, classes: ['dark_elf'] },
-    claw_short: { name: '短鋼爪', type: 'weapon', weaponClass: 'claw', hands: 1, speed: 790, safe: 6, dice: '1d11', hit: 2, dropRate: 0.3, classes: ['dark_elf'] },
-    claw_ivory: { name: '象牙塔鋼爪', type: 'weapon', weaponClass: 'claw', hands: 1, speed: 800, safe: 0, dice: '1d10', dropRate: 0.5, classes: ['dark_elf'] },
-    claw_silver: { name: '銀光鋼爪', type: 'weapon', weaponClass: 'claw', hands: 1, speed: 800, safe: 6, dice: '1d10', dmg: 2, isUndeadSlayer: true, dropRate: 0.4, classes: ['dark_elf'] },
-    claw_dark: { ...ITEMS.claw_dark, dice: '1d11', dmg: 2, classes: ['dark_elf'] },
-    claw_damascus: { name: '大馬士革鋼爪', type: 'weapon', weaponClass: 'claw', hands: 1, speed: 800, safe: 6, dice: '2d5', unbreakable: true, dropRate: 0.2, classes: ['dark_elf'] },
-    claw_shadow_high: { name: '幽暗鋼爪', type: 'weapon', weaponClass: 'claw', hands: 1, speed: 790, safe: 6, dice: '2d6', hit: 3, dmg: 3, unbreakable: true, dropRate: 0.1, classes: ['dark_elf'] },
-    claw_dark_high: { name: '暗黑鋼爪', type: 'weapon', weaponClass: 'claw', hands: 1, speed: 780, safe: 6, dice: '2d7', hit: 5, dmg: 5, dropRate: 0.06, legendary: true, classes: ['dark_elf'] },
-    claw_balanka: { name: '巴蘭卡鋼爪', type: 'weapon', weaponClass: 'claw', hands: 1, speed: 780, safe: 6, dice: '1d16', dmg: 8, dropRate: 0.04, legendary: true, classes: ['dark_elf'] },
-    claw_beast_king: { name: '獸王鋼爪', type: 'weapon', weaponClass: 'claw', hands: 1, speed: 780, safe: 0, dice: '3d6', dmg: 10, dex: 2, dropRate: 0.02, legendary: true, classes: ['dark_elf'] },
-    claw_purgatory: { name: '煉獄鋼爪', type: 'weapon', weaponClass: 'claw', hands: 1, speed: 780, safe: 0, dice: '2d10', hit: -5, dmg: 4, clawCritRate: 0.5, dropRate: 0.02, legendary: true, classes: ['dark_elf'] },
-    claw_hades: { name: '黑帝斯鋼爪', type: 'weapon', weaponClass: 'claw', hands: 1, speed: 760, safe: 0, dice: '1d18', dmg: 5, dropRate: 0.01, legendary: true, classes: ['dark_elf'] }
-});
-
-Object.assign(MAPS, {
-    burning_forest: { name: '燃柳周遭', monsters: [
-        { id: 'high_orc', name: '高等妖魔', level: 18, hp: 130, ac: -4, exp: 260, atkSpeed: 1000, dice: '2d8+4', hitBonus: 4, weight: 80, adena: [80,150], drops: [{id:'sword_damascus', rate: 0.3}, {id:'amulet_orc_warrior', rate: 0.5}, {id:'potion_orange', rate: 8}, {id:'scroll_armor', rate: 0.5}] },
-        { id: 'casto', name: '卡司特', level: 21, hp: 200, ac: -10, exp: 442, atkSpeed: 2000, dice: '4d8+3', hitBonus: 5, weight: 79, adena: [120,220], drops: [{id:'battle_axe', rate: 2}, {id:'giant_axe', rate: 2}, {id:'book_slow', rate: 0.5}, {id:'book_summon', rate: 0.02}] },
-        { id: 'dark_elf_monster', name: '黑暗精靈', level: 27, hp: 260, ac: -14, exp: 760, atkSpeed: 800, dice: '2d8+4', hitBonus: 12, weight: 73, adena: [100,240], drops: [{id:'elven_breastplate', rate: 3}, {id:'potion_blue', rate: 2}, {id:'bow_elven', rate: 1}, {id:'cloak_elven', rate: 1}, {id:'elven_wafer', rate: 1}, {id:'crystal_elf_wind_shot', rate: 0.5}, {id:'boots_dark', rate: 0.3}, {id:'crystal_elf_storm_eye', rate: 0.3}, {id:'sandals_dark_elf', rate: 0.1}, {id:'crystal_elf_release_elemental', rate: 0.1}, {id:'book_tornado', rate: 0.1}, {id:'book_invisibility', rate: 0.01}, {id:'dual_steel', rate: 1}, {id:'claw_steel', rate: 1}] },
-        { id: 'ogre', name: '歐吉', level: 28, hp: 500, ac: -18, exp: 785, atkSpeed: 2000, dice: '4d10+8', weight: 72, adena: [180,320], drops: [{id:'battle_axe', rate: 2}, {id:'berserk_axe', rate: 1}, {id:'giant_axe', rate: 2}, {id:'helm_str_magic', rate: 0.2}, {id:'armor_rattan', rate: 3}, {id:'belt_ogre', rate: 0.05}, {id:'gloves_str', rate: 0.05}, {id:'dagger_ori', rate: 0.1}] },
-        { id: 'casto_king', name: '卡司特王', level: 33, hp: 300, ac: -13, exp: 1090, atkSpeed: 2000, dice: '4d12+5', hitBonus: 5, weight: 67, adena: [220,420], drops: [{id:'battle_axe', rate: 2}, {id:'berserk_axe', rate: 1}, {id:'giant_axe', rate: 2}, {id:'helm_heal_magic', rate: 0.5}, {id:'book_slow', rate: 0.5}, {id:'book_full_heal', rate: 0.1}, {id:'dagger_ori', rate: 0.1}] }
-    ]}
-});
-
-MAPS.gludio_5f.monsters = MAPS.gludio_5f.monsters.filter(m => m.id !== 'death_knight');
-if (MAPS.gludio_7f && !MAPS.gludio_7f.monsters.some(m => m.id === 'death_knight')) {
-    MAPS.gludio_7f.monsters.push({ id: 'death_knight', name: '死亡騎士', level: 52, hp: 4000, ac: -67, mr: 65, exp: 3026, atkSpeed: 1200, dice: '5d8+12', hitBonus: 18, isBoss: true, weight: 10, adena: [1500,3000], drops: [{id:'katana', rate: 10}, {id:'sword_two_handed', rate: 10}, {id:'sword_dk_fire', rate: 1}, {id:'helm_dk', rate: 5}, {id:'armor_dk', rate: 5}, {id:'gloves_dk', rate: 5}, {id:'boots_dk', rate: 5}, {id:'book_knight_counter_barrier', rate: 0.18}] });
-    MAPS.gludio_7f.monsters.push({ id: 'orin_easter', name: '歐林', level: 1, hp: 1, ac: 10, exp: 1, atkSpeed: 9999, dice: '1d1', hitBonus: 0, weight: 1, adena: [0,0], drops: [{id:'potion_red', rate: 100}, {id:'potion_orange', rate: 50}, {id:'potion_clear', rate: 30}, {id:'scroll_armor', rate: 100}, {id:'scroll_weapon_blessed', rate: 1}, {id:'scroll_armor_blessed', rate: 1}] });
-}
-
-MAPS.forgotten_island.monsters.forEach(m => {
-    if (m.id === 'great_minotaur') m.drops.push({id:'sealed_forgotten_great_sword', rate: 0.2}, {id:'sealed_forgotten_crossbow', rate: 0.2});
-    if (m.id === 'ancient_guardian') m.drops.push({id:'sealed_forgotten_sword', rate: 0.3}, {id:'sealed_forgotten_dual_blade', rate: 0.3}, {id:'sealed_forgotten_staff', rate: 0.3}, {id:'sealed_forgotten_leather_armor', rate: 0.3}, {id:'sealed_forgotten_robe_armor', rate: 0.3}, {id:'sealed_forgotten_metal_armor', rate: 0.3});
-    if (m.isBoss) m.drops.push({id:'quiver_ancient', rate: 0.08});
-});
-['lastavard','demon_temple','forgotten_island','shadow_temple'].forEach(mapId => {
-    if (!MAPS[mapId]) return;
-    MAPS[mapId].monsters.forEach(m => {
-        if (!m.isBoss && m.ac < -60) m.ac = -60;
-        if (!m.isBoss && m.ac > -40 && m.level >= 58) m.ac = -40;
-    });
-});
-
 const game = {
     state: {
-        isPlaying: false, classId: 'knight', level: 1, exp: 0, adena: 0, hp: 0, maxHp: 0, mp: 0, maxMp: 0,
+        isPlaying: false, level: 1, exp: 0, adena: 0, hp: 0, maxHp: 0, mp: 0, maxMp: 0,
         baseStats: { str: 8, dex: 8, con: 8, int: 8, wis: 8 }, createPoints: 25, bonusPoints: 0,
-        inventory: {}, equipment: { weapon: null, shield: null, quiver: null, helmet: null, tshirt: null, armor: null, leggings: null, boots: null, cloak: null, gloves: null, amulet: null, earring1: null, earring2: null, ring1: null, ring2: null, belt: null },
+        inventory: {}, equipment: { weapon: null, shield: null, helmet: null, tshirt: null, armor: null, leggings: null, boots: null, cloak: null, gloves: null, amulet: null, earring1: null, earring2: null, ring1: null, ring2: null, belt: null },
         spells: [], buffs: {},
         settings: { autoHpThreshold: 5, autoHpType: 'potion_red', autoBuyHp: false, autoBuyMp: false, autoBuyWis: false, autoBuyHaste: false, autoAttack: 'none', autoAttackMpThreshold: 0, autoBuffs: [], autoHealSpell: 'none', autoHealThreshold: 50 },
-        currentMap: 'hidden_valley', targetMonster: null,
+        currentMap: 'knight_village', targetMonster: null,
         battleLoop: null, monsterLoop: null, magicLoop: null, regenLoop: null, tickLoop: null, mapChangeLoop: null,
         potionCooldown: 0, autoHealCd: 0, enchantTargetKey: null, zombieTick: 0, monsterSpecialTick: 0, antarasDeadUntil: 0
     },
@@ -1138,7 +767,6 @@ const game = {
     showCreation: function() {
         document.getElementById('start-menu').classList.add('hidden');
         document.getElementById('creation-menu').classList.remove('hidden');
-        this.selectClass(this.state.classId || 'knight');
         this.updateCreateUI();
     },
     showStartMenu: function() {
@@ -1147,7 +775,7 @@ const game = {
     },
     saveGame: function() {
         const saveData = {
-            classId: this.state.classId, level: this.state.level, exp: this.state.exp, adena: this.state.adena,
+            level: this.state.level, exp: this.state.exp, adena: this.state.adena,
             hp: this.state.hp, maxHp: this.state.maxHp, mp: this.state.mp, maxMp: this.state.maxMp,
             baseStats: this.state.baseStats, bonusPoints: this.state.bonusPoints,
             inventory: this.state.inventory, equipment: this.state.equipment, spells: this.state.spells,
@@ -1176,7 +804,7 @@ const game = {
                     }
                 }
 
-                let defaultEq = { weapon: null, shield: null, quiver: null, helmet: null, tshirt: null, armor: null, leggings: null, boots: null, cloak: null, gloves: null, amulet: null, earring1: null, earring2: null, ring1: null, ring2: null, belt: null };
+                let defaultEq = { weapon: null, shield: null, helmet: null, tshirt: null, armor: null, leggings: null, boots: null, cloak: null, gloves: null, amulet: null, earring1: null, earring2: null, ring1: null, ring2: null, belt: null };
                 let equipmentMap = { ...defaultEq };
                 
                 if (savedData.equipment) {
@@ -1194,7 +822,6 @@ const game = {
                 this.state.inventory = migratedInv;
                 this.state.equipment = equipmentMap;
                 this.sanitizeRemovedSystemItems();
-                this.state.classId = CLASSES[savedData.classId] ? savedData.classId : 'wizard';
                 this.state.level = parseInt(savedData.level) || 1;
                 this.state.exp = parseInt(savedData.exp) || 0;
                 this.state.adena = parseInt(savedData.adena) || 0;
@@ -1202,7 +829,7 @@ const game = {
                 this.state.createPoints = parseInt(savedData.createPoints) || 0;
                 this.state.bonusPoints = parseInt(savedData.bonusPoints) || 0;
                 this.state.spells = Array.isArray(savedData.spells) ? savedData.spells.filter(id => SPELLS[id]) : [];
-                this.state.currentMap = savedData.currentMap || 'hidden_valley';
+                this.state.currentMap = savedData.currentMap || 'knight_village';
                 this.state.antarasDeadUntil = savedData.antarasDeadUntil || 0;
                 
                 this.state.settings = { ...this.state.settings, ...(savedData.settings || {}) };
@@ -1239,7 +866,7 @@ const game = {
                 
                 let mapSel = document.getElementById('map-select');
                 if (Array.from(mapSel.options).some(o => o.value === this.state.currentMap)) mapSel.value = this.state.currentMap;
-                else { this.state.currentMap = 'hidden_valley'; mapSel.value = 'hidden_valley'; }
+                else { this.state.currentMap = 'knight_village'; mapSel.value = 'knight_village'; }
                 
                 this.logSystem('讀取存檔成功！歡迎回來。', 'reward');
                 this.startLoops();
@@ -1281,79 +908,20 @@ const game = {
         if(tabId === 'magic') this.renderSkills();
     },
 
-    getClassDef: function() {
-        return CLASSES[this.state.classId] || CLASSES.knight;
-    },
-    selectClass: function(classId) {
-        if (!CLASSES[classId]) return;
-        this.state.classId = classId;
-        this.state.baseStats = { ...CLASSES[classId].baseStats };
-        this.state.createPoints = CLASSES[classId].createPoints;
-        this.updateCreateUI();
-    },
-    getWeaponClass: function(itemId) {
-        let def = ITEMS[itemId];
-        if (!def || def.type !== 'weapon') return 'none';
-        return def.weaponClass || 'melee';
-    },
-    canUseSpellForClass: function(spellId) {
-        let spell = SPELLS[spellId];
-        return !!spell && (!spell.classes || spell.classes.includes(this.state.classId));
-    },
-    getSpellRequiredLevel: function(spellId) {
-        let spell = SPELLS[spellId];
-        if (!spell) return 999;
-        let cls = this.getClassDef();
-        if (spell.classes && spell.classes.includes('elf')) return spell.level * (cls.classMagicLevelStep || 10);
-        if (spell.classes && spell.classes.includes('dark_elf')) return spell.level * (cls.classMagicLevelStep || 15);
-        if (spell.classes && spell.classes.includes('knight')) return spell.level >= 5 ? 50 : Math.max(50, spell.level * 10);
-        if (this.state.classId === 'knight') return spell.level === 1 ? 50 : 999;
-        return spell.level * (cls.magicLevelStep || 4);
-    },
-    getSpellMaxLevelForClass: function(spellId) {
-        let spell = SPELLS[spellId];
-        let cls = this.getClassDef();
-        if (!spell) return 0;
-        if (spell.classes && spell.classes.includes('elf')) return 6;
-        if (spell.classes && spell.classes.includes('dark_elf')) return 4;
-        if (spell.classes && spell.classes.includes('knight')) return 5;
-        return cls.magicMaxLevel || cls.spellMaxLevel || 1;
-    },
     adjustStat: function(stat, amount) {
-        let minStats = this.getClassDef().baseStats;
-        if(amount > 0 && this.state.createPoints > 0 && this.state.baseStats[stat] < 20) { this.state.baseStats[stat]++; this.state.createPoints--; } 
-        else if(amount < 0 && this.state.baseStats[stat] > minStats[stat]) { this.state.baseStats[stat]--; this.state.createPoints++; }
+        if(amount > 0 && this.state.createPoints > 0 && this.state.baseStats[stat] < 18) { this.state.baseStats[stat]++; this.state.createPoints--; } 
+        else if(amount < 0 && this.state.baseStats[stat] > 8) { this.state.baseStats[stat]--; this.state.createPoints++; }
         this.updateCreateUI();
     },
     updateCreateUI: function() {
         ['str','dex','con','int','wis'].forEach(s => document.getElementById(`create-${s}`).innerText = this.state.baseStats[s]);
         document.getElementById('create-points').innerText = this.state.createPoints;
         document.getElementById('btn-start').disabled = this.state.createPoints > 0;
-        let cls = this.getClassDef();
-        let desc = document.getElementById('class-desc');
-        if (desc) desc.innerHTML = `<span class="c-warn">${cls.name}</span>：${cls.desc}`;
-        document.querySelectorAll('.class-btn').forEach(btn => btn.classList.remove('c-success'));
-        let order = ['knight', 'elf', 'wizard', 'dark_elf'];
-        let idx = order.indexOf(this.state.classId);
-        let btn = document.querySelectorAll('.class-btn')[idx];
-        if (btn) btn.classList.add('c-success');
     },
     startGame: function() {
         document.getElementById('char-creation-modal').style.display = 'none';
         document.getElementById('main-ui').classList.remove('hidden');
-        this.state.currentMap = 'hidden_valley';
-        let mapSel = document.getElementById('map-select');
-        if (mapSel) mapSel.value = 'hidden_valley';
         this.addInventory('dagger_orc', 1, 0, false);
-        this.addInventory('leather_jacket', 1, 0, false);
-        this.state.equipment.weapon = this.getItemKey('dagger_orc', 0, false);
-        this.state.equipment.armor = this.getItemKey('leather_jacket', 0, false);
-        if (this.state.classId === 'wizard' && !this.state.spells.includes('light_arrow')) this.state.spells.push('light_arrow');
-        if (this.state.classId === 'elf') {
-            this.addInventory('bow_short', 1, 0, false);
-            this.addInventory('quiver_normal', 1, 0, false);
-            this.state.equipment.quiver = this.getItemKey('quiver_normal', 0, false);
-        }
         this.addInventory('potion_red', 50, 0, false);
         this.calculateMaxHpMp();
         this.state.hp = this.state.maxHp;
@@ -1368,15 +936,6 @@ const game = {
 
     getEffStat: function(stat) {
         let val = this.state.baseStats[stat];
-        if (stat === 'str' && this.state.buffs.de_dress_mighty) val += 2;
-        if (stat === 'wis' && this.state.buffs.elf_clear_mind) val += 3;
-        for(let slot in this.state.equipment) {
-            let itemKey = this.state.equipment[slot];
-            if(itemKey && this.state.inventory[itemKey]) {
-                let def = ITEMS[this.state.inventory[itemKey].itemId];
-                if(def && def[stat]) val += def[stat];
-            }
-        }
         let amuKey = this.state.equipment.amulet;
         if (amuKey && this.state.inventory[amuKey]) {
             let amuId = this.state.inventory[amuKey].itemId;
@@ -1416,10 +975,9 @@ const game = {
     },
 
     calculateMaxHpMp: function() {
-        let cls = this.getClassDef();
         let effCon = this.getEffStat('con');
         let conBonus = effCon <= 15 ? 0 : effCon - 15;
-        let calcMaxHp = cls.hpBase + (this.state.level * (cls.hpPerLevel + conBonus));
+        let calcMaxHp = 12 + (this.state.level * (6 + conBonus));
         let beltKey = this.state.equipment.belt;
         if (beltKey && this.state.inventory[beltKey]) {
             let beltName = ITEMS[this.state.inventory[beltKey].itemId].name;
@@ -1428,13 +986,6 @@ const game = {
         }
         let sets = this.getSetBonuses();
         calcMaxHp += sets.hp;
-        for(let slot in this.state.equipment) {
-            let itemKey = this.state.equipment[slot];
-            if(itemKey && this.state.inventory[itemKey]) {
-                let def = ITEMS[this.state.inventory[itemKey].itemId];
-                if(def && def.hp) calcMaxHp += def.hp;
-            }
-        }
         this.state.maxHp = calcMaxHp;
         
         let effWis = this.getEffStat('wis');
@@ -1446,7 +997,7 @@ const game = {
         if(effWis === 18) wisBonus = 4;
         if(effWis > 18) wisBonus = 4 + (effWis - 18);
         
-        let calcMaxMp = cls.mpBase + (this.state.level * Math.max(1, cls.mpPerLevel + wisBonus));
+        let calcMaxMp = 10 + (this.state.level * (6 + wisBonus));
         if (beltKey && this.state.inventory[beltKey]) {
             let beltName = ITEMS[this.state.inventory[beltKey].itemId].name;
             if (beltName === '精神腰帶') calcMaxMp += 50;
@@ -1456,13 +1007,6 @@ const game = {
         if (robeKey && this.state.inventory[robeKey]) {
             let robeName = ITEMS[this.state.inventory[robeKey].itemId].name;
             if (robeName === '黑長者長袍') calcMaxMp += 50;
-        }
-        for(let slot in this.state.equipment) {
-            let itemKey = this.state.equipment[slot];
-            if(itemKey && this.state.inventory[itemKey]) {
-                let def = ITEMS[this.state.inventory[itemKey].itemId];
-                if(def && def.mp) calcMaxMp += def.mp;
-            }
         }
         this.state.maxMp = calcMaxMp;
         if(this.state.hp > this.state.maxHp) this.state.hp = this.state.maxHp;
@@ -1488,8 +1032,6 @@ const game = {
         let sets = this.getSetBonuses();
         ac -= sets.ac;
         if(this.state.buffs.shield) ac -= 2;
-        if(this.state.buffs.elf_earth_skin) ac -= 3;
-        if(this.state.buffs.de_shadow_armor) ac -= 2;
         if(this.state.buffs.berserkers) ac += 10;
         return ac;
     },
@@ -1505,17 +1047,6 @@ const game = {
         }
         let sets = this.getSetBonuses();
         dr += sets.dr;
-        let cls = this.getClassDef();
-        if (cls.drBase || cls.drEvery) dr += (cls.drBase || 0) + Math.floor(this.state.level / (cls.drEvery || 999));
-        if (this.state.buffs.knight_reduction_armor) dr += 2 + Math.floor(this.state.level / 20);
-        if (this.state.buffs.elf_iron_skin) dr += 2;
-        for(let slot in this.state.equipment) {
-            let itemKey = this.state.equipment[slot];
-            if(itemKey && this.state.inventory[itemKey]) {
-                let def = ITEMS[this.state.inventory[itemKey].itemId];
-                if(def && def.dr) dr += def.dr;
-            }
-        }
         return dr;
     },
     getStrBonus: function() {
@@ -1564,57 +1095,30 @@ const game = {
         let dexBonus = this.getDexBonus().hit;
         let wpnHit = 0;
         let wKey = this.state.equipment.weapon;
-        let weaponClass = 'melee';
         if(wKey && this.state.inventory[wKey]) {
             let item = this.state.inventory[wKey];
             if(ITEMS[item.itemId]) {
-                weaponClass = this.getWeaponClass(item.itemId);
                 wpnHit = (ITEMS[item.itemId].hit || 0) + Number(item.enchant);
                 if (item.isBlessed) wpnHit += 1;
             }
         }
         let sets = this.getSetBonuses();
-        if (weaponClass === 'bow' && this.state.buffs.elf_wind_shot) wpnHit += 3;
-        if (weaponClass === 'bow' && this.state.buffs.elf_storm_shot) wpnHit += 5;
-        if (weaponClass === 'bow' && this.state.buffs.elf_storm_eye) wpnHit += 2;
-        if (weaponClass === 'bow' && this.state.buffs.elf_triple_arrow) wpnHit += 30;
-        if (weaponClass === 'bow') return dexBonus * 2 + wpnHit + sets.hit + Math.floor(this.state.level / 10);
-        if (this.state.classId === 'dark_elf' && ['claw','dual_blade'].includes(weaponClass)) return strBonus + dexBonus + wpnHit + sets.hit + 2;
         return strBonus + dexBonus + wpnHit + sets.hit;
     },
     getMeleeDmg: function() {
         let strBonus = this.getStrBonus().dmg;
-        let dexBonus = this.getDexBonus().hit;
         let wpnDmg = 0;
         let wKey = this.state.equipment.weapon;
-        let weaponClass = 'melee';
         if(wKey && this.state.inventory[wKey]) {
             let item = this.state.inventory[wKey];
-            weaponClass = this.getWeaponClass(item.itemId);
             wpnDmg = Number(item.enchant);
-            if (ITEMS[item.itemId] && ITEMS[item.itemId].dmg) wpnDmg += ITEMS[item.itemId].dmg;
             if (item.isBlessed) wpnDmg += 1;
         }
-        let quiverKey = this.state.equipment.quiver;
-        if (weaponClass === 'bow' && quiverKey && this.state.inventory[quiverKey]) {
-            let qDef = ITEMS[this.state.inventory[quiverKey].itemId];
-            if (qDef && qDef.arrowDmg) wpnDmg += qDef.arrowDmg;
-        }
         if (this.state.buffs.enchant_weapon) wpnDmg += 2;
-        if (this.state.buffs.elf_fire_weapon) wpnDmg += 2;
-        if (this.state.buffs.elf_elemental_fire) wpnDmg += 4;
-        if (this.state.buffs.de_burning_spirit) wpnDmg += 3;
-        if (this.state.buffs.de_shadow_fang) wpnDmg += 5;
-        if (this.state.buffs.de_dress_mighty) wpnDmg += 2;
         if (this.state.buffs.berserkers) wpnDmg += 5;
-        let wDef = wKey && this.state.inventory[wKey] ? ITEMS[this.state.inventory[wKey].itemId] : null;
-        if (this.state.buffs.player_weapon_break > 0 && !(wDef && wDef.unbreakable) && !['bow','claw','dual_blade'].includes(weaponClass)) wpnDmg -= 10;
+        if (this.state.buffs.player_weapon_break > 0) wpnDmg -= 10;
         let sets = this.getSetBonuses();
-        let cls = this.getClassDef();
-        let classDmg = cls.meleeDmgBonusEvery && weaponClass === 'melee' ? Math.floor(this.state.level / cls.meleeDmgBonusEvery) : 0;
-        if (weaponClass === 'bow') return Math.floor(dexBonus * 1.5) + wpnDmg + sets.dmg;
-        if (this.state.classId === 'dark_elf' && ['claw','dual_blade'].includes(weaponClass)) return strBonus + wpnDmg + sets.dmg + 2;
-        return strBonus + wpnDmg + sets.dmg + classDmg;
+        return strBonus + wpnDmg + sets.dmg;
     },
     getMagicDmg: function() {
         let int = this.getEffStat('int');
@@ -1659,18 +1163,13 @@ const game = {
                 if(ITEMS[item.itemId] && ITEMS[item.itemId].mrPerEnchant) mr += ITEMS[item.itemId].mrPerEnchant * Number(item.enchant);
             }
         }
-        if (this.state.buffs.elf_resist_magic) mr += 10;
         return Math.min(100, mr);
     },
     getER: function() {
-        let er = this.getDexBonus().er;
-        if (this.state.buffs.knight_solid_carriage) er += 15;
-        if (this.state.buffs.de_uncanny_dodge) er += 10;
-        return er;
+        return this.getDexBonus().er;
     },
     
     getAvailableSpells: function() {
-        let cls = this.getClassDef();
         let spells = new Set(this.state.spells || []);
         let helmKey = this.state.equipment && this.state.equipment.helmet;
         if (helmKey && this.state.inventory && this.state.inventory[helmKey]) {
@@ -1679,12 +1178,11 @@ const game = {
             if (helmId === 'helm_str_magic') { spells.add('enchant_weapon'); spells.add('str_buff'); spells.add('detection'); }
             if (helmId === 'helm_dex_magic') { spells.add('dex_buff'); spells.add('haste'); }
         }
-        return Array.from(spells).filter(id => SPELLS[id] && SPELLS[id].level <= this.getSpellMaxLevelForClass(id) && this.canUseSpellForClass(id));
+        return Array.from(spells);
     },
 
     updateUI: function() {
         document.getElementById('ui-level').innerText = this.state.level;
-        document.getElementById('ui-class').innerText = this.getClassDef().name;
         document.getElementById('ui-hp-text').innerText = `${Math.floor(this.state.hp)}/${this.state.maxHp}`;
         document.getElementById('ui-hp-bar').style.width = `${Math.max(0, (this.state.hp/this.state.maxHp)*100)}%`;
         document.getElementById('ui-mp-text').innerText = `${Math.floor(this.state.mp)}/${this.state.maxMp}`;
@@ -1714,7 +1212,6 @@ const game = {
         if(this.state.buffs.str_buff) buffHtml += '<span class="c-success mr-2">[體魄強健]</span>';
         if(this.state.buffs.enchant_weapon) buffHtml += '<span class="c-success mr-2">[擬似魔武]</span>';
         if(this.state.buffs.haste) buffHtml += '<span class="c-success mr-2">[加速術]</span>';
-        if(this.state.currentMap === 'hidden_valley') buffHtml += '<span class="c-success mr-2">[隱藏之谷加速]</span>';
         if(this.state.buffs.greater_haste) buffHtml += '<span class="c-success mr-2">[強力加速]</span>';
         if(this.state.buffs.shield) buffHtml += '<span class="c-info mr-2">[保護罩]</span>';
         if(this.state.buffs.immune_to_harm) buffHtml += '<span class="c-warn mr-2">[聖結界]</span>';
@@ -1748,7 +1245,7 @@ const game = {
         if (item.itemId === 'potion_wisdom') return 'c-potion-purple';
         if (item.itemId === 'potion_haste') return 'c-potion-purple';
         
-        let isEquip = ['weapon','helmet','tshirt','armor','shield','cloak','boots','leggings','gloves','amulet','earring','belt','ring','quiver'].includes(def.type);
+        let isEquip = ['weapon','helmet','tshirt','armor','shield','cloak','boots','leggings','gloves','amulet','earring','belt','ring'].includes(def.type);
         if (isEquip) {
             let safeLimit = def.safe !== undefined ? def.safe : 0;
             let overEnchant = Number(item.enchant) - safeLimit;
@@ -1795,7 +1292,6 @@ const game = {
         else if(def.type === 'ring') typeName = '戒指';
         else if(def.type === 'gloves') typeName = '手套';
         else if(def.type === 'gem') typeName = '寶石材料';
-        else if(def.type === 'quiver') typeName = '箭桶';
         
         if (typeName) html += `<div class="c-sys mb-2">[${typeName}]</div>`;
 
@@ -1804,16 +1300,12 @@ const game = {
             html += `<div>攻擊力: <span class="text-white">${baseAttack}</span></div>`;
             html += `<div>安定值: <span class="text-white">${def.safe !== undefined ? def.safe : 0}</span></div>`;
             if (def.hit) html += `<div>額外命中: <span class="text-white">+${def.hit}</span></div>`;
-            if (def.dmg) html += `<div>額外傷害: <span class="text-white">+${def.dmg}</span></div>`;
             if (def.mDmg) html += `<div>魔法額外傷害: <span class="text-white">+${def.mDmg}</span></div>`;
             if (def.isUndeadSlayer) html += `<div class="c-info mt-1">對不死族與狼人族造成 3~6 點額外傷害</div>`;
-        } else if (['helmet','tshirt','armor','shield','cloak','boots','leggings','gloves','amulet','earring','belt','ring','quiver'].includes(def.type)) {
+        } else if (['helmet','tshirt','armor','shield','cloak','boots','leggings','gloves','amulet','earring','belt','ring'].includes(def.type)) {
             if (def.ac !== undefined && def.ac !== 0) html += `<div>防禦力 (AC): <span class="text-white">${def.ac}</span></div>`;
             if (def.safe !== undefined) html += `<div>安定值: <span class="text-white">${def.safe !== undefined ? def.safe : 0}</span></div>`;
             if (def.mr) html += `<div>魔防 (MR): <span class="text-white">+${def.mr}%</span></div>`;
-            if (def.hp) html += `<div>最大 HP: <span class="text-white">+${def.hp}</span></div>`;
-            if (def.dr) html += `<div>傷害減免: <span class="text-white">+${def.dr}</span></div>`;
-            if (def.arrowDmg) html += `<div>遠程傷害: <span class="text-white">+${def.arrowDmg}</span></div>`;
         }
         
         if (def.desc) html += `<div class="c-warn mt-3 text-base">${def.desc}</div>`;
@@ -1859,7 +1351,7 @@ const game = {
         if(!invList || !eqList) return;
         invList.innerHTML = ''; eqList.innerHTML = '';
         
-        let slotNames = { 'weapon': '武器', 'shield': '盾牌', 'quiver': '箭桶', 'helmet': '頭盔', 'tshirt': 'T恤', 'armor': '盔甲', 'cloak': '斗篷', 'leggings': '脛甲', 'boots': '靴子', 'belt': '腰帶', 'amulet': '項鍊', 'earring1': '耳環1', 'earring2': '耳環2', 'ring1': '戒指1', 'ring2': '戒指2', 'gloves': '手套' };
+        let slotNames = { 'weapon': '武器', 'helmet': '頭盔', 'tshirt': 'T恤', 'armor': '盔甲', 'shield': '盾牌', 'cloak': '斗篷', 'leggings': '脛甲', 'boots': '靴子', 'belt': '腰帶', 'amulet': '項鍊', 'earring1': '耳環1', 'earring2': '耳環2', 'ring1': '戒指1', 'ring2': '戒指2', 'gloves': '手套' };
         let activeSetItemKeys = [];
         let eqKeyToId = {};
         for(let slot in this.state.equipment) {
@@ -1920,10 +1412,10 @@ const game = {
             let qty = displayCount > 1 ? ` <span class="c-sys">x${displayCount}</span>` : '';
             let actions = '';
             
-            if(['weapon','helmet','tshirt','armor','shield','cloak','boots','leggings','belt','amulet','earring','ring','gloves','quiver'].includes(def.type)) {
+            if(['weapon','helmet','tshirt','armor','shield','cloak','boots','leggings','belt','amulet','earring','ring','gloves'].includes(def.type)) {
                 actions += `<button class="btn-ui border-blue-700 text-blue-300" onclick="game.showItemDetail('${key}')">詳細</button> `;
                 actions += `<button class="btn-ui border-yellow-700 text-yellow-300" onclick="game.equip('${key}')">裝備</button> `;
-                if(!['belt','amulet','ring','quiver'].includes(def.type)) actions += `<button class="btn-ui" onclick="game.openEnchantModal('${key}')">強化</button> `;
+                if(def.type !== 'belt' && def.type !== 'amulet' && def.type !== 'ring') actions += `<button class="btn-ui" onclick="game.openEnchantModal('${key}')">強化</button> `;
             } else if(def.type === 'book') {
                 actions += `<button class="btn-ui c-success border-green-800" onclick="game.learnSpell('${key}')">學習</button> `;
             } else if(def.type.startsWith('potion')) {
@@ -1936,7 +1428,7 @@ const game = {
 
             let canSell = false;
             let sellPrice = 0;
-            if (['weapon','helmet','tshirt','armor','shield','cloak','boots','leggings','belt','amulet','earring','ring','gloves','quiver'].includes(def.type) && Number(item.enchant) === 0 && !def.unique) {
+            if (['weapon','helmet','tshirt','armor','shield','cloak','boots','leggings','belt','amulet','earring','ring','gloves'].includes(def.type) && Number(item.enchant) === 0 && !def.unique) {
                 if(item.isBlessed || def.isBlessed) { canSell = true; sellPrice = 100000; }
                 else { 
                     canSell = true;
@@ -1967,17 +1459,6 @@ const game = {
         if(!item) return;
         let def = ITEMS[item.itemId];
         if(!def) return;
-        if(def.classes && !def.classes.includes(this.state.classId)) {
-            this.logSystem(`${this.getClassDef().name} 無法裝備 ${def.name}。`, 'danger');
-            return;
-        }
-        if(def.type === 'weapon') {
-            let weaponClass = this.getWeaponClass(item.itemId);
-            if(!this.getClassDef().allowedWeaponClasses.includes(weaponClass)) {
-                this.logSystem(`${this.getClassDef().name} 無法裝備 ${def.name}。`, 'danger');
-                return;
-            }
-        }
         let slotToEquip = def.type;
         if(def.type === 'ring') {
             let equippedCount = (this.state.equipment.ring1 === itemKey ? 1 : 0) + (this.state.equipment.ring2 === itemKey ? 1 : 0);
@@ -2022,10 +1503,6 @@ const game = {
         let item = this.state.inventory[itemKey];
         if(!item) return;
         let def = ITEMS[item.itemId];
-        if(def.classes && !def.classes.includes(this.state.classId)) {
-            this.logSystem(`${this.getClassDef().name} 無法使用 ${def.name}。`, 'danger');
-            return;
-        }
         this.removeInventory(itemKey, 1);
         
         if(def.type === 'potion_hp') {
@@ -2048,9 +1525,6 @@ const game = {
             } else if (item.itemId === 'potion_haste') {
                 this.state.buffs.potion_haste = def.duration;
                 this.logCombat(`使用了 加速藥水。攻擊速度提升。`, 'hit');
-            } else if (def.buffId) {
-                this.state.buffs[def.buffId] = def.duration;
-                this.logCombat(`使用了 ${def.name}。`, 'hit');
             }
         }
         this.updateUI();
@@ -2064,14 +1538,6 @@ const game = {
         if(!item) return;
         let def = ITEMS[item.itemId];
         let spellId = def.spellId;
-        if(SPELLS[spellId] && !this.canUseSpellForClass(spellId)) {
-            this.logSystem(`${this.getClassDef().name} 無法學習 ${SPELLS[spellId].name}。`, 'danger');
-            return;
-        }
-        if(SPELLS[spellId] && SPELLS[spellId].level > this.getSpellMaxLevelForClass(spellId)) {
-            this.logSystem(`${this.getClassDef().name} 無法學習 ${SPELLS[spellId].name}。`, 'danger');
-            return;
-        }
         
         if(this.state.spells.includes(spellId)) {
             this.logSystem(`你已經學會了 ${SPELLS[spellId].name}。`, 'warn');
@@ -2264,18 +1730,6 @@ const game = {
         this.renderInventory();
         this.updateUI();
     },
-    craftAncientItem: function(sealedId, resultId) {
-        if (this.getItemCount('ancient_scroll') < 1 || this.getItemCount(sealedId) < 1) {
-            this.logSystem(`需要古代的卷軸與 ${ITEMS[sealedId].name}。`, 'danger');
-            return;
-        }
-        this.removeItemById('ancient_scroll', 1);
-        this.removeItemById(sealedId, 1);
-        this.addInventory(resultId, 1, 0, false);
-        this.logSystem(`製作完成：${ITEMS[resultId].name}。`, 'reward');
-        this.renderInventory();
-        this.updateUI();
-    },
     updateSettingsUI: function() {
         let atkSel = document.getElementById('cfg-auto-attack');
         let healSel = document.getElementById('cfg-heal-spell');
@@ -2285,7 +1739,7 @@ const game = {
         availSpells.forEach(id => {
             let sp = SPELLS[id];
             if(!sp) return;
-            if(sp.type === 'attack' && this.state.level >= this.getSpellRequiredLevel(id)) atkSel.innerHTML += `<option value="${id}">${sp.name}</option>`;
+            if(sp.type === 'attack' && this.state.level >= sp.level * 4) atkSel.innerHTML += `<option value="${id}">${sp.name}</option>`;
         });
         if (Array.from(atkSel.options).some(opt => opt.value === currentAtk)) atkSel.value = currentAtk;
         else { atkSel.value = 'none'; this.state.settings.autoAttack = 'none'; }
@@ -2295,12 +1749,12 @@ const game = {
         availSpells.forEach(id => {
             let sp = SPELLS[id];
             if(!sp) return;
-            if(sp.type === 'heal' && this.state.level >= this.getSpellRequiredLevel(id)) healSel.innerHTML += `<option value="${id}">${sp.name}</option>`;
+            if(sp.type === 'heal' && this.state.level >= sp.level * 4) healSel.innerHTML += `<option value="${id}">${sp.name}</option>`;
         });
         if (Array.from(healSel.options).some(opt => opt.value === currentHeal)) healSel.value = currentHeal;
         else { healSel.value = 'none'; this.state.settings.autoHealSpell = 'none'; }
         
-        document.getElementById('ui-max-spell-lv').innerText = getChineseNumber(Math.max(1, Math.max(...this.getAvailableSpells().map(id => SPELLS[id].level))));
+        document.getElementById('ui-max-spell-lv').innerText = getChineseNumber(Math.max(1, Math.floor(this.state.level/4)));
         let hasteChk = document.getElementById('cfg-auto-haste');
         if (hasteChk) hasteChk.checked = !!this.state.settings.autoBuyHaste;
     },
@@ -2345,7 +1799,7 @@ const game = {
             if (spellsByLevel[lvl].length > 0) {
                 let groupHtml = `<div class="mb-4"><div class="text-sm c-sys border-b border-gray-800 pb-1 mb-2">${getChineseNumber(lvl)}階魔法</div><div class="grid grid-cols-5 gap-2">`;
                 spellsByLevel[lvl].forEach(spell => {
-                    let canUse = this.state.level >= this.getSpellRequiredLevel(spell.id);
+                    let canUse = this.state.level >= spell.level * 4;
                     let isBuff = spell.type === 'buff', isPassive = spell.type === 'passive', isHeal = spell.type === 'heal';
                     let checked = this.state.settings.autoBuffs.includes(spell.id) ? 'checked' : '';
                     let equipMark = !this.state.spells.includes(spell.id) ? '<span class="text-xs c-warn block">[裝備]</span>' : '';
@@ -2375,38 +1829,14 @@ const game = {
     },
 
     takeMagicDmg: function(base) {
-        if (this.state.buffs.de_uncanny_dodge && Math.random() < 0.25) {
-            this.logCombat(`暗影殘影閃過了魔法傷害。`, 'success');
-            return 0;
-        }
         let targetMR = this.getMR();
         let d = Math.max(1, Math.floor(base * (100 - targetMR) / 100));
         if (this.state.buffs.immune_to_harm) d = Math.max(1, Math.floor(d * 0.7));
-        if (this.state.buffs.elf_release_elemental) d = Math.max(1, Math.floor(d * 0.9));
         this.state.hp -= d;
         return d;
     },
 
-    forceLeaveHiddenValley: function() {
-        this.stopBattle();
-        this.state.currentMap = 'knight_village';
-        this.state.targetMonster = null;
-        let mapSel = document.getElementById('map-select');
-        if (mapSel) mapSel.value = 'knight_village';
-        document.getElementById('target-name').innerText = '尋找目標中...';
-        document.getElementById('target-name').className = 'c-err font-bold text-2xl mb-4';
-        document.getElementById('target-hp-container').classList.add('hidden');
-        this.logSystem('您已超過13等，警衛將您帶到銀騎士村', 'danger');
-        this.updateUI();
-        clearTimeout(this.state.mapChangeLoop);
-        this.state.mapChangeLoop = setTimeout(() => this.startBattle(), 1000);
-    },
-
     changeMap: function(mapId) {
-        if (mapId === 'hidden_valley' && this.state.level > 13) {
-            this.forceLeaveHiddenValley();
-            return;
-        }
         if (mapId === 'antaras_lair' && this.state.antarasDeadUntil && Date.now() < this.state.antarasDeadUntil) {
             this.stopBattle();
             this.state.currentMap = mapId;
@@ -2431,10 +1861,6 @@ const game = {
     },
     spawnMonster: function() {
         if(this.state.hp <= 0) return;
-        if (this.state.currentMap === 'hidden_valley' && this.state.level > 13) {
-            this.forceLeaveHiddenValley();
-            return;
-        }
         
         if (this.state.currentMap === 'antaras_lair' && this.state.antarasDeadUntil && Date.now() < this.state.antarasDeadUntil) {
             document.getElementById('target-name').innerText = `安塔瑞斯尚未重生... (${Math.ceil((this.state.antarasDeadUntil - Date.now()) / 1000)}秒)`;
@@ -2462,7 +1888,7 @@ const game = {
         this.state.monsterSpecialTick = 0;
         
         let availSpells = this.getAvailableSpells();
-        if (selected.name === '史巴托' && availSpells.includes('detection') && this.state.level >= this.getSpellRequiredLevel('detection')) {
+        if (selected.name === '史巴托' && availSpells.includes('detection') && this.state.level >= SPELLS['detection'].level * 4) {
             this.state.targetMonster.debuffs.sleep = 5;
             this.logCombat(`【無所遁形術】看破了史巴托的潛伏，使其停止行動 5 秒。`, 'info');
         }
@@ -2494,69 +1920,29 @@ const game = {
     playerAttack: function() {
         if(!this.state.targetMonster || this.state.hp <= 0 || (this.state.buffs.petrified > 0) || (this.state.buffs.stun > 0)) return;
         
-        let dmg = 0, isHit = false, isGraze = false;
+        let dmg = 0, isHit = false;
         let wKey = this.state.equipment.weapon;
         let wpn = null, wDef = null;
         if(wKey && this.state.inventory[wKey]) { wpn = this.state.inventory[wKey]; wDef = ITEMS[wpn.itemId]; }
-        let weaponClass = wpn ? this.getWeaponClass(wpn.itemId) : 'melee';
         
         let dbf = this.state.targetMonster.debuffs || {};
-        let doubleBreakTriggered = this.state.buffs.de_double_break && ['claw','dual_blade'].includes(weaponClass) && Math.random() < 0.35;
-        let tAc = this.state.targetMonster.ac + (dbf.disease > 0 ? 8 : 0) + (dbf.armor_break > 0 ? 30 : 0);
-        if (doubleBreakTriggered) tAc = Math.max(0, tAc);
+        let tAc = this.state.targetMonster.ac + (dbf.disease > 0 ? 8 : 0);
         let roll = rollDice('1d20');
         let isCrit = false;
         
         if(roll === 1) isHit = false;
         else if(roll === 20) { isHit = true; isCrit = true; }
         else if(roll + this.getMeleeHit() + (this.state.level - this.state.targetMonster.level) >= 10 - tAc) isHit = true;
-        if(!isHit && roll !== 1 && Math.random() < 0.25) isGraze = true;
-        if(isHit && this.state.classId === 'dark_elf' && ['claw','dual_blade'].includes(weaponClass) && Math.random() < 0.12) isCrit = true;
         
-        if(isHit || isGraze) {
+        if(isHit) {
             let dice = wDef && wDef.dice ? wDef.dice : '1d2';
-            let dDmg = isCrit ? getDiceMax(dice) : rollDice(dice);
-            if (weaponClass === 'dual_blade' && !isGraze && Math.random() < 0.25) dDmg = (dDmg + (wpn ? Number(wpn.enchant) : 0)) * 2;
-            if (weaponClass === 'claw' && !isGraze && Math.random() < (wDef && wDef.clawCritRate ? wDef.clawCritRate : 0.35)) {
-                dDmg = getDiceMax(dice) + (wpn ? Number(wpn.enchant) : 0);
-                isCrit = true;
-            }
-            if (isCrit && this.state.classId === 'dark_elf' && ['claw','dual_blade'].includes(weaponClass)) dDmg = Math.floor(dDmg * 1.5);
+            let dDmg = isCrit ? parseInt(dice.split('d')[1]) : rollDice(dice);
             let bonusUndead = 0;
             if (wDef && wDef.isUndeadSlayer && (this.state.targetMonster.isUndead || this.state.targetMonster.isWerewolf)) {
                 bonusUndead = Math.floor(Math.random() * 4) + 3; 
             }
-            let quiverKey = this.state.equipment.quiver;
-            let qDef = quiverKey && this.state.inventory[quiverKey] ? ITEMS[this.state.inventory[quiverKey].itemId] : null;
-            if (weaponClass === 'bow' && qDef && qDef.undeadBonus && (this.state.targetMonster.isUndead || this.state.targetMonster.isWerewolf)) bonusUndead += Math.floor(Math.random() * 4) + 3;
             dmg = Math.max(1, dDmg + this.getMeleeDmg() + bonusUndead);
-            if (isGraze) dmg = Math.max(1, Math.floor((getDiceMax(dice) + Math.max(0, this.getMeleeDmg())) * 0.3));
-            let cls = this.getClassDef();
-            if (this.state.targetMonster.isBoss && cls.bossDmgBonus) dmg = Math.max(1, Math.floor(dmg * (1 + cls.bossDmgBonus)));
-            if (weaponClass === 'bow' && this.state.buffs.elf_triple_arrow) dmg = Math.max(1, Math.floor(dmg * 1.3));
-            if (doubleBreakTriggered && !isGraze) {
-                dmg *= 2;
-                if (weaponClass === 'dual_blade' && Math.random() < 0.15) dmg *= 2;
-                isCrit = true;
-            }
-            if (weaponClass === 'bow' && this.state.buffs.elf_triple_arrow) {
-                let absoluteDmg = Math.floor(this.state.maxMp * 0.1);
-                if (qDef && qDef.magicArrow && ['ancient_crossbow','bow_sayha'].includes(wpn?.itemId)) absoluteDmg += qDef.arrowDmg || 0;
-                this.state.targetMonster.hp -= absoluteDmg;
-                this.logCombat(`三重矢附加屬性傷害 ${absoluteDmg} 點。`, 'magic');
-            }
-            if (this.state.buffs.de_enchant_venom && Math.random() < 0.2) {
-                let poisonDmg = Math.max(1, Math.floor(this.state.targetMonster.maxHp * 0.01));
-                this.state.targetMonster.hp -= poisonDmg;
-                this.logCombat(`附加劇毒侵蝕了 ${this.state.targetMonster.name}，造成 ${poisonDmg} 點傷害。`, 'magic');
-            }
-            if (this.state.buffs.de_burning_spirit && this.state.classId === 'dark_elf' && (isCrit || dDmg >= getDiceMax(dice))) {
-                let leech = Math.max(1, Math.floor(dmg * 0.1));
-                this.state.hp = Math.min(this.state.maxHp, this.state.hp + leech);
-                this.logCombat(`燃燒鬥志吸收了 ${leech} 點體力。`, 'success');
-            }
-            let actionText = weaponClass === 'bow' ? '射出一箭命中了' : (['claw','dual_blade'].includes(weaponClass) ? '迅速撕裂了' : '命中了');
-            this.logCombat(`你${isGraze ? '擦傷了' : actionText} ${this.state.targetMonster.name} 造成 ${dmg} 點傷害${isCrit?' (爆擊！)':''}${doubleBreakTriggered?' (破防！)':''}${bonusUndead > 0 ? ` (弱點加成 +${bonusUndead})` : ''}。`, 'hit');
+            this.logCombat(`你命中了 ${this.state.targetMonster.name} 造成 ${dmg} 點傷害${isCrit?' (爆擊！)':''}${bonusUndead > 0 ? ` (弱點加成 +${bonusUndead})` : ''}。`, 'hit');
             
             if (wpn && wpn.itemId === 'staff_mana') {
                 let mpDrain = this.rollManaStaffDrain(wpn.enchant);
@@ -2578,9 +1964,9 @@ const game = {
                 this.logCombat(`死亡騎士的烈炎之劍發動了 烈炎術，造成 ${finalDmg} 點傷害。`, 'magic');
                 this.state.targetMonster.hp -= finalDmg;
             }
-        } else this.logCombat(weaponClass === 'bow' ? `你的箭矢被 ${this.state.targetMonster.name} 閃過。` : `你的攻擊未命中 ${this.state.targetMonster.name}。`);
+        } else this.logCombat(`你的攻擊未命中 ${this.state.targetMonster.name}。`);
 
-        if(isHit || isGraze) {
+        if(isHit) {
             this.state.targetMonster.hp -= dmg;
             this.updateMonsterHpBar();
             if(this.state.targetMonster.hp <= 0) this.monsterDied();
@@ -2592,7 +1978,7 @@ const game = {
         let sId = this.state.settings.autoAttack;
         if (sId === 'none' || !SPELLS[sId] || !this.getAvailableSpells().includes(sId)) return;
         let spell = SPELLS[sId];
-        if(this.state.level < this.getSpellRequiredLevel(sId)) return;
+        if(this.state.level < spell.level * 4) return;
         
         let dbf = this.state.targetMonster.debuffs || {};
         if (spell.id === 'darkness' && dbf.darkness > 0) return;
@@ -2643,26 +2029,6 @@ const game = {
             return;
         }
 
-        if (spell.id === 'knight_shock_stun') {
-            let wKey = this.state.equipment.weapon;
-            let wDef = wKey && this.state.inventory[wKey] ? ITEMS[this.state.inventory[wKey].itemId] : null;
-            if (!wDef || wDef.hands !== 2) return;
-            if (!this.state.targetMonster.debuffs) this.state.targetMonster.debuffs = {};
-            let count = this.state.targetMonster.stunCount || 0;
-            let success = Math.random() < Math.max(0.15, 0.55 - count * 0.12);
-            if (success && this.state.targetMonster.isBoss) {
-                this.state.targetMonster.stunCount = count + 1;
-                this.state.targetMonster.debuffs.armor_break = Math.max(2, 4 - count);
-                this.state.monsterSpecialTick = Math.max(0, this.state.monsterSpecialTick - 3);
-                this.logCombat(`施放了 ${spell.name}，${this.state.targetMonster.name} 被打斷並破甲 ${this.state.targetMonster.debuffs.armor_break} 秒。`, 'magic');
-            } else if (success) {
-                this.state.targetMonster.stunCount = count + 1;
-                this.state.targetMonster.debuffs.sleep = Math.max(1, spell.duration - count);
-                this.logCombat(`施放了 ${spell.name}，${this.state.targetMonster.name} 被震暈 ${this.state.targetMonster.debuffs.sleep} 秒。`, 'magic');
-            } else this.logCombat(`施放了 ${spell.name}，但 ${this.state.targetMonster.name} 抵抗了。`, 'magic');
-            return;
-        }
-
         if (spell.dice) {
             let totalDmg = 0;
             let mDmg = this.getMagicDmg();
@@ -2692,10 +2058,6 @@ const game = {
                 }
                 
                 let finalDmg = this.calcMagicDmgToMonster(d);
-                if (this.state.targetMonster.isBoss && ['fire_storm','blizzard'].includes(spell.id) && this.state.targetMonster.hp <= this.state.targetMonster.maxHp * 0.2 && Math.random() < 0.1) {
-                    finalDmg *= 4;
-                    this.logCombat(`法術暴擊！${spell.name} 觸發核爆斬殺。`, 'magic');
-                }
                 totalDmg += finalDmg;
                 this.logCombat(`施放了 ${spell.name}，造成 ${finalDmg} 點傷害。`, 'magic');
             }
@@ -2755,19 +2117,9 @@ const game = {
             let dr = this.getDamageReduction();
             let dmg = Math.max(1, dDmg + baseD - dr); 
             if (this.state.buffs.immune_to_harm) dmg = Math.max(1, Math.floor(dmg * 0.7));
-            if (this.state.buffs.knight_reduction_armor && this.state.classId === 'knight' && this.state.hp <= this.state.maxHp * 0.35) dmg = Math.max(1, Math.floor(dmg * 0.6));
             
             this.state.hp -= dmg;
             this.logCombat(`${this.state.targetMonster.name} 命中了你，造成 ${dmg} 點傷害。`, 'danger');
-            let cbWKey = this.state.equipment.weapon;
-            let cbWDef = cbWKey && this.state.inventory[cbWKey] ? ITEMS[this.state.inventory[cbWKey].itemId] : null;
-            if (this.state.buffs.knight_counter_barrier && cbWDef && cbWDef.hands === 2 && Math.random() < 0.4) {
-                let counterDmg = Math.max(1, Math.floor(dmg * 1.5) + Math.abs(this.getAC()));
-                this.state.targetMonster.hp -= counterDmg;
-                this.logCombat(`反擊屏障反彈了 ${counterDmg} 點傷害。`, 'success');
-                this.updateMonsterHpBar();
-                if(this.state.targetMonster.hp <= 0) this.monsterDied();
-            }
             this.updateUI();
             
             if(this.state.hp <= 0) this.checkPlayerDeath();
@@ -2811,14 +2163,6 @@ const game = {
         if (lv >= 31) {
             if(Math.random()*100 < 0.1 * multi) { this.addInventory('scroll_accessory',1,0,false); this.logSystem(`${m.name} 給你 對飾品施法的卷軸。`, 'reward'); }
         }
-        if (m.id === 'orin_easter') {
-            let pot = ['potion_red', 'potion_orange', 'potion_clear'][Math.floor(Math.random() * 3)];
-            this.addInventory(pot, 500, 0, false);
-            this.addInventory('scroll_armor', 1, 0, false);
-            this.logSystem(`歐林留下了 ${ITEMS[pot].name} x500 與 對盔甲施法的卷軸。`, 'reward');
-            if(Math.random()*100 < 1) { this.addInventory('scroll_weapon_blessed',1,0,false); this.logSystem(`歐林額外留下了 受祝福的對武器施法的卷軸！`, 'blessed'); }
-            if(Math.random()*100 < 1) { this.addInventory('scroll_armor_blessed',1,0,false); this.logSystem(`歐林額外留下了 受祝福的對盔甲施法的卷軸！`, 'blessed'); }
-        }
         if(m.drops) {
             m.drops.forEach(d => { 
                 if(this.isRemovedSystemItem(d.id)) return;
@@ -2828,7 +2172,7 @@ const game = {
                         this.state.adena += sell;
                         this.logSystem(`賣出重複的 ${ITEMS[d.id].name} 獲得 ${sell} 金幣。`);
                     } else if (ITEMS[d.id]) {
-                        let isEquip = ['weapon','helmet','tshirt','armor','shield','cloak','boots','leggings','gloves','amulet','earring','belt','ring','quiver'].includes(ITEMS[d.id].type);
+                        let isEquip = ['weapon','helmet','tshirt','armor','shield','cloak','boots','leggings','gloves','amulet','earring','belt','ring'].includes(ITEMS[d.id].type);
                         let isBlessed = false;
                         if (isEquip && Math.random() < 0.01) isBlessed = true;
 
@@ -2885,23 +2229,17 @@ const game = {
     },
     playerDied: function() {
         this.stopBattle();
-        if (this.state.currentMap !== 'hidden_valley') {
-            let req = EXP_TABLE[this.state.level] || 36065092;
-            let pen = Math.floor(req * 0.1);
-            this.state.exp = Math.max(0, this.state.exp - pen);
-        }
+        let req = EXP_TABLE[this.state.level] || 36065092;
+        let pen = Math.floor(req * 0.1);
+        this.state.exp = Math.max(0, this.state.exp - pen);
         this.state.hp = Math.floor(this.state.maxHp * 0.1);
-        if (this.state.currentMap === 'hidden_valley') this.logSystem(`你在隱藏之谷死亡了，不會失去經驗值。`, 'danger');
-        else this.logSystem(`你死亡了！失去經驗值。`, 'danger');
+        this.logSystem(`你死亡了！失去經驗值。`, 'danger');
         this.updateUI();
         
         document.getElementById('target-name').innerText = '尋找目標中...';
         document.getElementById('target-name').className = 'c-err font-bold text-2xl mb-4';
         
-        setTimeout(() => {
-            this.logSystem(this.state.currentMap === 'hidden_valley' ? '在隱藏之谷中復活。' : '在村莊中復活。');
-            this.startBattle();
-        }, 3000);
+        setTimeout(() => { this.logSystem('在村莊中復活。'); this.startBattle(); }, 3000);
     },
     checkLevelUp: function() {
         let req = EXP_TABLE[this.state.level] || 36065092;
@@ -2921,7 +2259,6 @@ const game = {
             this.updateSettingsUI();
             this.renderSkills(); 
             this.checkLevelUp();
-            if (this.state.currentMap === 'hidden_valley' && this.state.level > 13) this.forceLeaveHiddenValley();
         }
     },
 
@@ -2933,13 +2270,6 @@ const game = {
                 let con = this.getEffStat('con');
                 let h = con<=13?1:con-12;
                 if (this.state.buffs.heal_erosion) h = Math.floor(h / 2);
-                for(let slot in this.state.equipment) {
-                    let itemKey = this.state.equipment[slot];
-                    if(itemKey && this.state.inventory[itemKey]) {
-                        let def = ITEMS[this.state.inventory[itemKey].itemId];
-                        if(def && def.hpRegen) h += def.hpRegen;
-                    }
-                }
                 this.state.hp = Math.min(this.state.maxHp, this.state.hp + h);
             }
             if(this.state.mp < this.state.maxMp) {
@@ -2947,13 +2277,6 @@ const game = {
                 let r = wis<=14?1:wis<=16?2:wis===17?3:4;
                 if(this.state.buffs.potion_blue) r += (wis<=11?1:1+(wis-10));
                 if(this.state.buffs.potion_wisdom) r += 2;
-                for(let slot in this.state.equipment) {
-                    let itemKey = this.state.equipment[slot];
-                    if(itemKey && this.state.inventory[itemKey]) {
-                        let def = ITEMS[this.state.inventory[itemKey].itemId];
-                        if(def && def.mpRegen) r += def.mpRegen;
-                    }
-                }
                 
                 let robeKey = this.state.equipment.armor;
                 if(robeKey && this.state.inventory[robeKey]) {
@@ -3034,11 +2357,6 @@ const game = {
                     this.logCombat(`地獄犬發動噴火，造成 ${this.takeMagicDmg(rollDice('3d8'))} 點魔法傷害！`, 'danger');
                     needUpdate = true; this.checkPlayerDeath();
                 }
-
-                if (tmId === 'dark_elf_monster' && st % 10 === 0 && Math.random() < 0.4) {
-                    for(let i=0; i<5; i++) this.logCombat(`黑暗精靈施展龍捲風，造成 ${this.takeMagicDmg(rollDice('1d16')+5)} 點魔法傷害！`, 'danger');
-                    needUpdate = true; this.checkPlayerDeath();
-                }
                 
                 if (tmId === 'black_elder' && !(tm.debuffs?.sleep > 0)) {
                     if (st % 12 === 0) {
@@ -3054,12 +2372,6 @@ const game = {
                         this.logCombat(`黑長者施展了治癒侵蝕術，你的恢復量減半！`, 'danger');
                         needUpdate = true;
                     }
-                }
-
-                if (tmId === 'succubus_queen' && st % 12 === 0) {
-                    this.state.buffs.heal_erosion = 18;
-                    this.logCombat(`思克巴女皇施展治癒侵蝕術，你的恢復量減半！`, 'danger');
-                    needUpdate = true;
                 }
 
                 if (st % 10 === 0 && !(tm.debuffs?.sleep > 0) && tmId === 'arian') {
@@ -3082,12 +2394,6 @@ const game = {
                         }
                         needUpdate = true; this.checkPlayerDeath();
                     }
-                }
-
-                if (['ifrit','valakas','phoenix','fire_warrior','fire_salamander'].includes(tmId) && st % 16 === 0) {
-                    this.state.buffs.player_weapon_break = 18;
-                    this.logCombat(`${tm.name} 施展了壞物術，你的武器傷害降低了！`, 'danger');
-                    needUpdate = true;
                 }
                 
                 if (tmId === 'antaras' && !(tm.debuffs?.sleep > 0)) {
@@ -3125,20 +2431,6 @@ const game = {
                         this.logCombat(`死亡騎士發動衝暈，你陷入了昏迷！`, 'danger');
                         needUpdate = true;
                     }
-                }
-
-                if (['ice_queen','arian'].includes(tmId) && st % 12 === 0) {
-                    if (Math.random() * 100 < (65 - this.getMR())) {
-                        this.state.buffs.petrified = 4;
-                        this.logCombat(`${tm.name} 施展了石化，你暫時無法行動！`, 'danger');
-                        needUpdate = true;
-                    }
-                }
-
-                if (tm.isBoss && ['antaras','death_knight','black_elder','valakas','fafurion','ice_queen','demon'].includes(tmId) && st % 18 === 0 && Math.random() < 0.35) {
-                    ['immune_to_harm','shield','dex_buff','str_buff','enchant_weapon','berserkers','elf_triple_arrow','elf_storm_shot','elf_iron_skin','knight_counter_barrier','knight_reduction_armor','de_double_break','de_uncanny_dodge','de_burning_spirit'].forEach(b => delete this.state.buffs[b]);
-                    this.logCombat(`${tm.name} 施展魔法相消術，強制洗掉了你的主要增益狀態！`, 'danger');
-                    needUpdate = true;
                 }
             }
             
@@ -3186,13 +2478,8 @@ const game = {
 
                 for(let sId of this.state.settings.autoBuffs) {
                     let sp = SPELLS[sId];
-                    if(availSpells.includes(sId) && this.state.level >= this.getSpellRequiredLevel(sId)) {
+                    if(availSpells.includes(sId) && this.state.level >= sp.level * 4) {
                         let shouldCast = (!this.state.buffs[sId] || this.state.buffs[sId] <= 0);
-                        if (sId === 'knight_counter_barrier') {
-                            let wKey = this.state.equipment.weapon;
-                            let wDef = wKey && this.state.inventory[wKey] ? ITEMS[this.state.inventory[wKey].itemId] : null;
-                            if (!wDef || wDef.hands !== 2) shouldCast = false;
-                        }
 
                         if (shouldCast && sId !== 'cancel') { 
                             let cost = this.getSpellCost(sp);
@@ -3217,7 +2504,7 @@ const game = {
                     let hId = this.state.settings.autoHealSpell;
                     if (hId && hId !== 'none' && availSpells.includes(hId)) {
                         let sp = SPELLS[hId];
-                        if (this.state.level >= this.getSpellRequiredLevel(hId)) {
+                        if (this.state.level >= sp.level * 4) {
                             let cost = this.getSpellCost(sp);
                             if(this.state.mp >= cost) {
                                 this.state.mp -= cost;
@@ -3311,7 +2598,7 @@ const game = {
             let speed = (wKey && this.state.inventory[wKey]) ? (ITEMS[this.state.inventory[wKey].itemId]?.speed || 1200) : 1200;
             
             let reduction = 0;
-            if (this.state.buffs.haste || this.state.buffs.potion_haste || this.state.currentMap === 'hidden_valley') reduction += 0.2;
+            if (this.state.buffs.haste || this.state.buffs.potion_haste) reduction += 0.2;
             if (this.state.buffs.greater_haste) reduction += 0.3;
             speed = speed * (1 - reduction);
             
